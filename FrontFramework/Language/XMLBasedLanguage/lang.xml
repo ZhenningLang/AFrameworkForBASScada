@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<translations>
+  <languages>
+    <language>chinese</language>
+    <language>english</language>
+  </languages>
+  
+  <group id="login">
+    <chinese>登陆</chinese>
+    <english>login</english>
+  </group>
+  <group id="dicEditor">
+    <chinese>词典编辑</chinese>
+    <english>DicEditor</english>
+  </group>
+  <group id="add">
+    <chinese>添加</chinese>
+    <english>Add</english>
+  </group>
+</translations>

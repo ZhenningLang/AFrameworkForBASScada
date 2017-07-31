@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+  <!-- 报警音量大小 -->
+  <property id="historyVolume">0.87037037037037</property>
+  <!-- 所选车站站码 -->
+  <property id="historyStationCode">13</property>
+  <!-- 车站信息，所有值均为id，具体显示什么在字典里 -->
+  <property id="stations" type="list" lang="ch">
+    <item stationCode="1" transfer="BatongLine">Station-1</item>
+    <item stationCode="2" transfer="BatongLine">Station-2</item>
+    <item stationCode="3" transfer="Line-1 Line-14">Station-3</item>
+    <item stationCode="4" transfer="Line-10">Station-4</item>
+    <item stationCode="5">Station-5</item>
+    <item stationCode="6" transfer="Line-2">Station-6</item>
+    <item stationCode="7" transfer="Line-2">Station-7</item>
+    <item stationCode="8">Station-8</item>
+    <item stationCode="9">Station-9</item>
+    <item stationCode="10">Station-10</item>
+    <item stationCode="11" transfer="Line-1 Line-4">Station-11</item>
+    <item stationCode="12" transfer="Line-2">Station-12</item>
+    <item stationCode="13">Station-13</item>
+    <item stationCode="14">Station-14</item>
+    <item stationCode="15" transfer="Line-9">Station-15</item>
+    <item stationCode="16" transfer="Line-10">Station-16</item>
+    <item stationCode="17">Station-17</item>
+    <item stationCode="18">Station-18</item>
+    <item stationCode="19">Station-19</item>
+    <item stationCode="20">Station-20</item>
+    <item stationCode="21">Station-21</item>
+    <item stationCode="22">Station-22</item>
+    <item stationCode="23">Station-23</item>
+  </property>
+</properties>

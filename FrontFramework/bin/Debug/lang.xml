@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<translations>
+  <!-- 语言习惯记录 -->
+  <historyLanguage>
+    <from>ENGLISH</from>
+    <to>CHINESE</to>
+  </historyLanguage>
+  <!-- 功能性翻译，id 固定，手动修改 -->
+  <!-- 
+       id 列表
+       MainWindowName ：主窗口名称
+    -->
+  <group id="MAIN_WINDOW_NAME" type="sys">
+    <chinese> 主窗口名称，请在 lang.xml 文档中修改 </chinese>
+    <english> Main window name, please revise it in the file lang.xml </english>
+  </group>
+  <!-- 站名翻译 -->
+  <group id="Station-1" type="sys">
+    <chinese> 四惠东 </chinese>
+    <english> Sihui East </english>
+  </group>
+  <group id="Station-2" type="sys">
+    <chinese> 四惠 </chinese>
+    <english> Sihui </english>
+  </group>
+  <group id="Station-3" type="sys">
+    <chinese> 大望路 </chinese>
+    <english> Dawanglu</english>
+  </group>
+  <group id="Station-4" type="sys">
+    <chinese> 国贸 </chinese>
+    <english> Guomao </english>
+  </group>
+  <group id="Station-5" type="sys">
+    <chinese> 永安里 </chinese>
+    <english> Yonganli </english>
+  </group>
+  <group id="Station-6" type="sys">
+    <chinese> 建国门 </chinese>
+    <english> Jianguomen </english>
+  </group>
+  <group id="Station-7" type="sys">
+    <chinese> 东单 </chinese>
+    <english> Dongdan </english>
+  </group>
+  <group id="Station-8" type="sys">
+    <chinese> 王府井 </chinese>
+    <english> Wangfujing </english>
+  </group>
+  <group id="Station-9" type="sys">
+    <chinese> 天安门东 </chinese>
+    <english> Tiananmen East </english>
+  </group>
+  <group id="Station-10" type="sys">
+    <chinese> 天安门西 </chinese>
+    <english> Tiananmen West </english>
+  </group>
+  <group id="Station-11" type="sys">
+    <chinese> 西单 </chinese>
+    <english> Xidan </english>
+  </group>
+  <group id="Station-12" type="sys">
+    <chinese> 复兴门 </chinese>
+    <english> Fuxingmen </english>
+  </group>
+  <group id="Station-13" type="sys">
+    <chinese> 南礼士路 </chinese>
+    <english> Nanlishilu </english>
+  </group>
+  <group id="Station-14" type="sys">
+    <chinese> 木樨地 </chinese>
+    <english> Muxidi </english>
+  </group>
+  <group id="Station-15" type="sys">
+    <chinese> 军事博物馆 </chinese>
+    <english> Military Museum </english>
+  </group>
+  <group id="Station-16" type="sys">
+    <chinese> 公主坟 </chinese>
+    <english> Gongzhufen </english>
+  </group>
+  <group id="Station-17" type="sys">
+    <chinese> 万寿路 </chinese>
+    <english> Wanshoulu </english>
+  </group>
+  <group id="Station-18" type="sys">
+    <chinese> 五棵松 </chinese>
+    <english> Wukesong </english>
+  </group>
+  <group id="Station-19" type="sys">
+    <chinese> 玉泉路 </chinese>
+    <english> Yuquanlu </english>
+  </group>
+  <group id="Station-20" type="sys">
+    <chinese> 八宝山 </chinese>
+    <english> Babaoshan </english>
+  </group>
+  <group id="Station-21" type="sys">
+    <chinese> 八角游乐园 </chinese>
+    <english> Bajiao Amusement Park </english>
+  </group>
+  <group id="Station-22" type="sys">
+    <chinese> 古城 </chinese>
+    <english> Gucheng </english>
+  </group>
+  <group id="Station-23" type="sys">
+    <chinese> 苹果园 </chinese>
+    <english> Pingguoyuan </english>
+  </group>
+  <!-- 线路翻译 -->
+  <group id="Line-1" type="sys">
+    <chinese> 1号线 </chinese>
+    <english> Line 1 </english>
+  </group>
+  <group id="Line-2" type="sys">
+    <chinese> 2号线 </chinese>
+    <english> Line 2 </english>
+  </group>
+  <group id="Line-4" type="sys">
+    <chinese> 4号线 </chinese>
+    <english> Line 4 </english>
+  </group>
+  <group id="Line-5" type="sys">
+    <chinese> 5号线 </chinese>
+    <english> Line 5 </english>
+  </group>
+  <group id="Line-6" type="sys">
+    <chinese> 6号线 </chinese>
+    <english> Line 6 </english>
+  </group>
+  <group id="Line-9" type="sys">
+    <chinese> 9号线 </chinese>
+    <english> Line 9 </english>
+  </group>
+  <group id="Line-10" type="sys">
+    <chinese> 10号线 </chinese>
+    <english> Line 10 </english>
+  </group>
+  <group id="Line-14" type="sys">
+    <chinese> 14号线 </chinese>
+    <english> Line 14 </english>
+  </group>
+  <group id="BatongLine" type="sys">
+    <chinese> 八通线 </chinese>
+    <english> Batong Line </english>
+  </group>
+  <!-- 以下为常规翻译 -->
+  <group id="Login">
+    <chinese>登陆</chinese>
+    <english>Login</english>
+  </group>
+  <group id="Add">
+    <chinese>添加</chinese>
+    <english>Add</english>
+  </group>
+  <group id="Edit">
+    <chinese>编辑</chinese>
+    <english>Edit</english>
+  </group>
+  <group id="Delete">
+    <chinese>删除</chinese>
+    <english>Delete</english>
+  </group>
+  <group id="DicEditor">
+    <chinese>词典编辑</chinese>
+    <english>DicEditor</english>
+  </group>
+  <group id="UserName">
+    <chinese>用户名</chinese>
+    <english>UserName</english>
+  </group>
+  <group id="Password">
+    <chinese>密码</chinese>
+    <english>Password</english>
+  </group>
+  <group id="Language">
+    <chinese>语言</chinese>
+    <english>Language</english>
+  </group>
+  <group id="Cancel">
+    <chinese>取消</chinese>
+    <english>Cancel</english>
+  </group>
+  <group id="Failure">
+    <chinese>失败</chinese>
+    <english>Failure</english>
+  </group>
+  <group id="Chinese">
+    <chinese>中文</chinese>
+    <english>Chinese</english>
+  </group>
+  <group id="English">
+    <chinese>英文</chinese>
+    <english>English</english>
+  </group>
+  <group id="Ok">
+    <chinese>确定</chinese>
+    <english>OK</english>
+  </group>
+  <group id="Please">
+    <chinese>请</chinese>
+    <english>Please</english>
+  </group>
+  <group id="Choose">
+    <chinese>选择</chinese>
+    <english>Choose</english>
+  </group>
+  <group id="One">
+    <chinese>一个</chinese>
+    <english>One</english>
+  </group>
+  <group id="Row">
+    <chinese>行</chinese>
+    <english>Row</english>
+  </group>
+  <group id="System">
+    <chinese>系统</chinese>
+    <english>System</english>
+  </group>
+  <group id="User">
+    <chinese>用户</chinese>
+    <english>User</english>
+  </group>
+  <group id="Logout">
+    <chinese>登出</chinese>
+    <english>Logout</english>
+  </group>
+  <group id="Tools">
+    <chinese>工具</chinese>
+    <english>Tools</english>
+  </group>
+  <group id="Print">
+    <chinese>打印</chinese>
+    <english>Print</english>
+  </group>
+  <group id="PrintScr">
+    <chinese>截屏</chinese>
+    <english>PrintScr</english>
+  </group>
+  <group id="Dictionary">
+    <chinese>词典</chinese>
+    <english>Dictionary</english>
+  </group>
+  <group id="Manage">
+    <chinese>管理</chinese>
+    <english>Manage</english>
+  </group>
+  <group id="Plugin">
+    <chinese>插件</chinese>
+    <english>Plugin</english>
+  </group>
+  <group id="View">
+    <chinese>视图</chinese>
+    <english>View</english>
+  </group>
+  <group id="Normal">
+    <chinese>正常</chinese>
+    <english>Normal</english>
+  </group>
+  <group id="Float Screen">
+    <chinese>浮动窗口</chinese>
+    <english>Float Screen</english>
+  </group>
+  <group id="Help">
+    <chinese>帮助</chinese>
+    <english>Help</english>
+  </group>
+  <group id="Document">
+    <chinese>文档</chinese>
+    <english>Document</english>
+  </group>
+  <group id="Online">
+    <chinese>在线</chinese>
+    <english>Online</english>
+  </group>
+  <group id="About">
+    <chinese>关于</chinese>
+    <english>About</english>
+  </group>
+  <group id="Station">
+    <chinese>车站</chinese>
+    <english>Station</english>
+  </group>
+  <group id="Unsolved">
+    <chinese>待解决</chinese>
+    <english>Unsolved</english>
+  </group>
+  <group id="Unconfirmed">
+    <chinese>待确认</chinese>
+    <english>Unconfirmed</english>
+  </group>
+  <group id="Mute">
+    <chinese>静音</chinese>
+    <english>Mute</english>
+  </group>
+  <group id="Detailed">
+    <chinese>详细</chinese>
+    <english>Detailed</english>
+  </group>
+  <group id="Info.">
+    <chinese>信息</chinese>
+    <english>Info.</english>
+  </group>
+  <group id="Type">
+    <chinese>类型</chinese>
+    <english>Type</english>
+  </group>
+  <group id="Level">
+    <chinese>级别</chinese>
+    <english>Level</english>
+  </group>
+  <group id="Date Time">
+    <chinese>时间</chinese>
+    <english>Date Time</english>
+  </group>
+  <group id="Location">
+    <chinese>位置</chinese>
+    <english>Location</english>
+  </group>
+  <group id="Description">
+    <chinese>描述</chinese>
+    <english>Description</english>
+  </group>
+  <group id="Exit">
+    <chinese>退出</chinese>
+    <english>Exit</english>
+  </group>
+  <group id="Full Screen">
+    <chinese>全屏</chinese>
+    <english>Full Screen</english>
+  </group>
+</translations>

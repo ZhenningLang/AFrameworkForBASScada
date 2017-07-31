@@ -1,0 +1,10 @@
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\bin\Debug\PluginExample.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\bin\Debug\PluginExample.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.Properties.Resources.resources
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.csproj.GenerateResource.Cache
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginTest.baml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginTest.g.cs
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample_MarkupCompile.cache
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.g.resources

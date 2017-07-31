@@ -1,0 +1,23 @@
+﻿<Window x:Class="FrontFramework.Language.Views.DictionaryEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Icon="../../resources/icon.ico" Height="506" Width="320" ResizeMode="NoResize"
+        FontSize="16" 
+        FontFamily="等线">
+
+    <Grid>
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="7,0,7,37" HorizontalAlignment="Stretch" RowHeaderWidth="0" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="1*" Binding="{Binding chinese}"/>
+                <DataGridTextColumn Width="1*" Binding="{Binding english}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <Button Name="buttonAdd" HorizontalAlignment="Left" Margin="7,435,0,7" VerticalAlignment="Top" Width="75" Click="addClick" Height="25" 
+                Background="#FF337AB7" Foreground="White"/>
+        <Button Name="buttonEdit" HorizontalAlignment="Left" Margin="114,435,0,7" VerticalAlignment="Top" Width="75" Click="editClick" Height="25" 
+                Background="#FF5FBF5F" Foreground="White"/>
+        <Button Name="buttonDel" HorizontalAlignment="Left" Margin="221,435,5,7" VerticalAlignment="Top" Width="75" Click="deleteClick" Height="25" 
+                Background="#FFD9534F" Foreground="White"/>
+    </Grid>
+</Window>

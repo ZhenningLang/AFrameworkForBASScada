@@ -1,0 +1,40 @@
+﻿<Window x:Class="FrontFramework.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+        Height="280" 
+        Width="311" 
+        Icon="resources/icon.ico" 
+        WindowStyle="ThreeDBorderWindow" 
+        ResizeMode="NoResize" 
+        FontSize="16" 
+        FontFamily="等线"
+        WindowStartupLocation ="CenterScreen">
+
+    <Grid Margin="0,0,0,-3">
+        <Label Name="labelUserName" HorizontalAlignment="Left" Margin="17,29,0,0" VerticalAlignment="Top" Width="100" Height="30"/>
+        <Label Name="labelPassword" HorizontalAlignment="Left" Margin="17,82,0,0" VerticalAlignment="Top" Width="100" Height="30"/>
+        <Label Name="labelLanguage" HorizontalAlignment="Left" Margin="17,136,0,0" VerticalAlignment="Top" Width="100" Height="30"/>
+
+        <Button Name="buttonLogin" HorizontalAlignment="Left" Margin="19,185,0,0" VerticalAlignment="Top" Width="120" Background="#FF337AB7" Foreground="White" Height="30" Click="loginClick"/>
+        <Button Name="buttonCancel" HorizontalAlignment="Left" Margin="153,185,0,0" VerticalAlignment="Top" Width="120" Foreground="White" Background="#FFD9534F" Height="30" Click="cancelClick"/>
+
+        <TextBox Name="userNameTextbox" Width="153" Height="30" Margin="120,29,0,0" TextWrapping="Wrap"
+                 HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"
+                 MaxLength="16" 
+                 input:InputMethod.IsInputMethodEnabled="False"/>
+        <PasswordBox Name="passwordTextbox" Width="153" Height="30" Margin="120,82,0,0" 
+                     HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"
+                     MaxLength="16"/>
+
+        <ComboBox Name="languageComboBox" Margin="120,136,0,0" Width="153" Height="30"
+                  HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" 
+                  SelectionChanged="languageComboBoxSelectionChanged"/>
+
+
+        <Label Name="statusDisplay"  Margin="17,215,0,0"
+               HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right"
+               Width="269" Height="29" 
+               FontSize="12" Foreground="Red"/>
+    </Grid>
+</Window>
