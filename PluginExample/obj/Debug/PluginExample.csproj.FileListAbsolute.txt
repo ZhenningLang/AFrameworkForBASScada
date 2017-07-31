@@ -8,3 +8,4 @@ C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExampl
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginTest.g.cs
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample_MarkupCompile.cache
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.g.resources
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.csprojResolveAssemblyReference.cache

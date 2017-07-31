@@ -1,6 +1,7 @@
 ﻿<Window x:Class="FrontFramework.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:pe="clr-namespace:PluginExample;assembly=PluginExample"
         Title="MainWindow" 
         MinWidth="800" MinHeight="600"
         Icon="resources/icon.ico" 
@@ -11,186 +12,192 @@
         KeyUp="mainScreenKeyUp"
         Width="Auto" Height="Auto">
     <!-- WindowStyle="ThreeDBorderWindow" WindowState="Maximized">  -->
-    
+
     <Grid>
-        <DockPanel>
-            <!-- 菜单区 -->
-            <Grid Name="MenuArea" DockPanel.Dock="Top" VerticalAlignment="Top">
-                <!-- 系统菜单 -->
-                <Menu FontSize="13">
-                    <MenuItem Name="menuSystem" Header="系统" Padding="10 1 10 1">
-                        <MenuItem Name="menuUser" Header="用户" Padding="10 1 10 1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- 菜单区 -->
+        <Grid Name="MenuArea" DockPanel.Dock="Top" VerticalAlignment="Top" Grid.Row="0">
+            <!-- 系统菜单 -->
+            <Menu FontSize="13">
+                <MenuItem Name="menuSystem" Header="系统" Padding="10 1 10 1">
+                    <MenuItem Name="menuUser" Header="用户" Padding="10 1 10 1">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/user.png"/>
+                        </MenuItem.Icon>
+                        <MenuItem Name="menuLogout" Header="登出" Click="logoutOnClick">
                             <MenuItem.Icon>
-                                <Image Source="resources/images/user.png"/>
-                            </MenuItem.Icon>
-                            <MenuItem Name="menuLogout" Header="登出" Click="logoutOnClick">
-                                <MenuItem.Icon>
-                                    <Image Source="resources/images/logout.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </MenuItem>
-                        <MenuItem Name="menuLanguage" Header="语言" Padding="10 1 10 1">
-                            <MenuItem.Icon>
-                                <Image Source="resources/images/language.png"/>
-                            </MenuItem.Icon>
-                            <MenuItem Name="menuChinese" Header="中文" Click="chMenuOnClick">
-                                <MenuItem.Icon>
-                                    <Image Name="chCheckedImg" Source="resources/images/checked.png" Visibility="Hidden"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Name="menuEnglish" Header="英文" Click="enMenuOnClick">
-                                <MenuItem.Icon>
-                                    <Image Name="enCheckedImg" Source="resources/images/checked.png" Visibility="Hidden"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </MenuItem>
-                    </MenuItem>
-                    <MenuItem Name="menuTools" Header="工具" Padding="10 1 10 1">
-                        <MenuItem Name="menuPrint" Header="打印" Click="printOnClick">
-                            <MenuItem.Icon>
-                                <Image Source="resources/images/print.png"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Name="menuPrintScr" Header="截图">
-                            <MenuItem.Icon>
-                                <Image Source="resources/images/screenshot.png"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Name="menuDicManager" Header="词典管理" Click="dicManagerOnClick">
-                            <MenuItem.Icon>
-                                <Image Source="resources/images/dictionary.png"/>
+                                <Image Source="resources/images/logout.png"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Name="menuPlugin" Header="插件" Padding="10 1 10 1">
-                        <MenuItem Name="menuPluginManager" Header="插件管理"/>
-                    </MenuItem>
-                    <MenuItem Name="menuView" Header="视图" Padding="10 1 10 1">
-                        <MenuItem Name="normalScreenMenu" Header="普通模式" Click="normalScreenOnClick"/>
-                        <MenuItem Name="fullScreenMenu" Header="全屏模式" ToolTip="Esc 退出" Click="fullScreenOnClick">
+                    <MenuItem Name="menuLanguage" Header="语言" Padding="10 1 10 1">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/language.png"/>
+                        </MenuItem.Icon>
+                        <MenuItem Name="menuChinese" Header="中文" Click="chMenuOnClick">
                             <MenuItem.Icon>
-                                <Image Source="resources/images/fullscreen.png"/>
+                                <Image Name="chCheckedImg" Source="resources/images/checked.png" Visibility="Hidden"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Name="floatScreenMenu" Header="悬浮窗模式" Click="floatScreenOnClick">
+                        <MenuItem Name="menuEnglish" Header="英文" Click="enMenuOnClick">
                             <MenuItem.Icon>
-                                <Image Source="resources/images/float window.png"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                    </MenuItem>
-                    <MenuItem Name="menuHelp" Header="帮助" Padding="10 1 10 1">
-                        <MenuItem Name="menuHelpDoc" Header="帮助文档">
-                            <MenuItem.Icon>
-                                <Image Source="resources/images/document help.png"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Name="menuHelpOnline" Header="在线帮助">
-                            <MenuItem.Icon>
-                                <Image Source="resources/images/online help.png"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Name="menuAbout" Header="关于">
-                            <MenuItem.Icon>
-                                <Image Source="resources/images/about.png"/>
+                                <Image Name="enCheckedImg" Source="resources/images/checked.png" Visibility="Hidden"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
-                    
-                    <MenuItem Background="#FFD6D6D6" Width="3"/>  <!-- A Separator-->
+                </MenuItem>
+                <MenuItem Name="menuTools" Header="工具" Padding="10 1 10 1">
+                    <MenuItem Name="menuPrint" Header="打印" Click="printOnClick">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/print.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="menuPrintScr" Header="截图">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/screenshot.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="menuDicManager" Header="词典管理" Click="dicManagerOnClick">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/dictionary.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Name="menuPlugin" Header="插件" Padding="10 1 10 1">
+                    <MenuItem Name="menuPluginManager" Header="插件管理"/>
+                </MenuItem>
+                <MenuItem Name="menuView" Header="视图" Padding="10 1 10 1">
+                    <MenuItem Name="normalScreenMenu" Header="普通模式" Click="normalScreenOnClick"/>
+                    <MenuItem Name="fullScreenMenu" Header="全屏模式" ToolTip="Esc 退出" Click="fullScreenOnClick">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/fullscreen.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="floatScreenMenu" Header="悬浮窗模式" Click="floatScreenOnClick">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/float window.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Name="menuHelp" Header="帮助" Padding="10 1 10 1">
+                    <MenuItem Name="menuHelpDoc" Header="帮助文档">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/document help.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="menuHelpOnline" Header="在线帮助">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/online help.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="menuAbout" Header="关于">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/about.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
 
-                    <!-- 插件菜单 -->
-                    <MenuItem Header="测试" Padding="10 1 10 1">
-                        <MenuItem Name="testStartAlarm" Header="开启报警" Click="testMenuClick"/>
-                        <MenuItem Name="testStopAlarm" Header="关闭报警" Click="testMenuClick"/>
-                    </MenuItem>
-                    <MenuItem Header="插件1" Padding="10 1 10 1"/>
-                    <MenuItem Header="插件2" Padding="10 1 10 1"/>
+                <MenuItem Background="#FFD6D6D6" Width="3"/>
+                <!-- A Separator-->
+
+                <!-- 插件菜单 -->
+                <MenuItem Header="测试" Padding="10 1 10 1">
+                    <MenuItem Name="testStartAlarm" Header="开启报警" Click="testMenuClick"/>
+                    <MenuItem Name="testStopAlarm" Header="关闭报警" Click="testMenuClick"/>
+                </MenuItem>
+                <MenuItem Header="插件1" Padding="10 1 10 1"/>
+                <MenuItem Header="插件2" Padding="10 1 10 1"/>
 
 
-                    <MenuItem Background="#FFD6D6D6" Width="3"/>  <!-- A Separator-->
+                <MenuItem Background="#FFD6D6D6" Width="3"/>
+                <!-- A Separator-->
 
-                    <!-- 车站菜单 -->
-                    <ComboBox Name="comboBoxStation" Padding="10 1 10 1" SelectionChanged="stationSelected">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel ToolTip="{Binding tipText}" Orientation="Horizontal">
-                                    <Image Source="{Binding imgPath}" Width="15" Height="15" Margin="1 1 1 3"/>
-                                    <TextBlock Text="{Binding stationName}" Margin="3 1 1 1"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                <!-- 车站菜单 -->
+                <ComboBox Name="comboBoxStation" Padding="10 1 10 1" SelectionChanged="stationSelected">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel ToolTip="{Binding tipText}" Orientation="Horizontal">
+                                <Image Source="{Binding imgPath}" Width="15" Height="15" Margin="1 1 1 3"/>
+                                <TextBlock Text="{Binding stationName}" Margin="3 1 1 1"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-                </Menu>
-            </Grid>
-            <!-- 视图切换区 -->
-            <Grid Name="ViewSwitchArea" DockPanel.Dock="Top" VerticalAlignment="Top">
-                <TabControl VerticalAlignment="Top">
-                    <TabItem Header="行车指挥">
-                        <Menu FontSize="13">
-                            <MenuItem Header="站场图" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="运行图" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="列车详细信息" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="设备拓扑图" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="临时限速" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="调度控制区域" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="历史数据下载" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="调度留言" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="发车列表" Padding="10 1 10 1"></MenuItem>
-                        </Menu>
-                    </TabItem>
-                    <TabItem Header="显示一级菜单">
-                        <Menu FontSize="13">
-                            <MenuItem Header="显示二级菜单1" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="显示二级菜单2" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="显示二级菜单3" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="显示二级菜单4" Padding="10 1 10 1"></MenuItem>
-                            <MenuItem Header="显示二级菜单5" Padding="10 1 10 1"></MenuItem>
-                        </Menu>
-                    </TabItem>
-                </TabControl>
-            </Grid>
-            <!-- 视图区 -->
-            <Grid Name="MainView" DockPanel.Dock="Top" Background="Orange" Margin="0 0 0 0">
-                <Menu HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 0">
-                    <MenuItem Header="Test4" Height="26" Width="79"/>
-                    <MenuItem Header="Test4" Height="26" Width="79"/>
-                    <MenuItem Header="Test4" Height="26" Width="79"/>
-                </Menu>
-            </Grid>
-            <!-- 报警区 -->
-            <Grid Name="AlarmArea" DockPanel.Dock="Bottom"  VerticalAlignment="Bottom">
-                <DockPanel Margin="5 0 5 10">
-                    <Separator DockPanel.Dock="Top" VerticalAlignment="Top"/>
-                    <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="3 3 3 3">
-                        <DockPanel Margin="0 1 0 1">
-                            <Label Name="labelWaitingSolved" DockPanel.Dock="Left" Content="未消除" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                            <TextBox DockPanel.Dock="Right" Text="aaa" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
-                        </DockPanel>
-                        <DockPanel Margin="0 1 0 1">
-                            <Label Name="labelWaitingConfirmed" DockPanel.Dock="Left" Content="未确认" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                            <TextBox DockPanel.Dock="Right" Text="bbb" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
-                        </DockPanel>
-                        <DockPanel Margin="0 1 0 1">
-                            <Button Name="buttonMute" DockPanel.Dock="Left" Content="静音" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0 1 0 1"
+            </Menu>
+        </Grid>
+        <!-- 视图切换区 -->
+        <Grid Name="ViewSwitchArea" DockPanel.Dock="Top" VerticalAlignment="Top" Grid.Row="1">
+            <TabControl VerticalAlignment="Top">
+                <TabItem Header="行车指挥">
+                    <Menu FontSize="13">
+                        <MenuItem Header="站场图" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="运行图" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="列车详细信息" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="设备拓扑图" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="临时限速" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="调度控制区域" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="历史数据下载" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="调度留言" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="发车列表" Padding="10 1 10 1"></MenuItem>
+                    </Menu>
+                </TabItem>
+                <TabItem Header="显示一级菜单">
+                    <Menu FontSize="13">
+                        <MenuItem Header="显示二级菜单1" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="显示二级菜单2" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="显示二级菜单3" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="显示二级菜单4" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="显示二级菜单5" Padding="10 1 10 1"></MenuItem>
+                    </Menu>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <!-- 视图区 -->
+        <Grid Name="MainView" DockPanel.Dock="Top" Grid.Row="2">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+                <ScrollViewer.Content>
+                    <Frame x:Name="MainViewFrame" Margin="0 0 0 0"/>
+                </ScrollViewer.Content>
+            </ScrollViewer>
+        </Grid>
+        <!-- 报警区 -->
+        <Grid Name="AlarmArea" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Grid.Row="3">
+            <DockPanel Margin="5 0 5 10">
+                <Separator DockPanel.Dock="Top" VerticalAlignment="Top"/>
+                <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="3 3 3 3">
+                    <DockPanel Margin="0 1 0 1">
+                        <Label Name="labelWaitingSolved" DockPanel.Dock="Left" Content="未消除" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox DockPanel.Dock="Right" Text="aaa" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
+                    </DockPanel>
+                    <DockPanel Margin="0 1 0 1">
+                        <Label Name="labelWaitingConfirmed" DockPanel.Dock="Left" Content="未确认" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox DockPanel.Dock="Right" Text="bbb" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
+                    </DockPanel>
+                    <DockPanel Margin="0 1 0 1">
+                        <Button Name="buttonMute" DockPanel.Dock="Left" Content="静音" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0 1 0 1"
                                     Click="muteButtonClick"/>
-                            <Slider Name="sliderVolume" DockPanel.Dock="Right" Margin="5 0 0 0" PreviewMouseLeftButtonUp="sliderVolumeMouseLeftButtonUp"></Slider>
-                        </DockPanel>
-                        <Button Name="buttonDetailedAlarmInfo" Content="详细信息" Width="110" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 1 0 1"/>
-                    </StackPanel>
-                    <DataGrid Name="alarmDataGrid" CanUserAddRows="False" Margin="3 3 3 3">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="1*" Header="类型"/>
-                            <DataGridTextColumn Width="1*" Header="级别"/>
-                            <DataGridTextColumn Width="2*" Header="时间"/>
-                            <DataGridTextColumn Width="2*" Header="地点"/>
-                            <DataGridTextColumn Width="1*" Header="系统"/>
-                            <DataGridTextColumn Width="5*" Header="描述"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </DockPanel>
-            </Grid>
-        </DockPanel>
+                        <Slider Name="sliderVolume" DockPanel.Dock="Right" Margin="5 0 0 0" PreviewMouseLeftButtonUp="sliderVolumeMouseLeftButtonUp"></Slider>
+                    </DockPanel>
+                    <Button Name="buttonDetailedAlarmInfo" Content="详细信息" Width="110" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 1 0 1"/>
+                </StackPanel>
+                <DataGrid Name="alarmDataGrid" CanUserAddRows="False" Margin="3 3 3 3">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="1*" Header="类型"/>
+                        <DataGridTextColumn Width="1*" Header="级别"/>
+                        <DataGridTextColumn Width="2*" Header="时间"/>
+                        <DataGridTextColumn Width="2*" Header="地点"/>
+                        <DataGridTextColumn Width="1*" Header="系统"/>
+                        <DataGridTextColumn Width="5*" Header="描述"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </Grid>
         <MediaElement Name="alarmPlayer" Visibility="Hidden" Source="resources/sounds/alarm.wav" LoadedBehavior="Manual" MediaEnded="alarmPlayerMediaEnd"/>
     </Grid>
 </Window>

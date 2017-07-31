@@ -46,6 +46,9 @@ namespace FrontFramework
 
             AlarmModuleInit();
             SysMenuInit();
+            ////////////////////////////////////
+            PluginExample.PluginTest test = new PluginExample.PluginTest();
+            MainViewFrame.Content = test;
         }
 
         ~MainWindow() 
@@ -285,6 +288,7 @@ namespace FrontFramework
                 setWindowState(screenState, ScreenStateEnum.NORMAL);
             }
         }
+
 
     }
 
