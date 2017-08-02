@@ -3,13 +3,18 @@ using FrontFramework.Interfaces;
 using FrontFramework.Language;
 using FrontFramework.Station;
 using FrontFramework.Utils;
+using PluginDefinition;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,6 +43,7 @@ namespace FrontFramework
         {
             InitializeComponent();
 
+            Compose(); // 加载插件 dll
             propUtil.loadProperty("resources/configs/config.xml");
             initializeComponentContents();
             this.Width = SystemParameters.WorkArea.Size.Width / 1.25;
@@ -47,14 +53,28 @@ namespace FrontFramework
             AlarmModuleInit();
             SysMenuInit();
             ////////////////////////////////////
-            PluginExample.PluginTest test = new PluginExample.PluginTest();
-            MainViewFrame.Content = test;
+            //PluginExample.PluginTest test = new PluginExample.PluginTest();
+            //MainViewFrame.Content = test;
         }
 
-        ~MainWindow() 
+        private void Compose()
         {
-            LanguageChangedNotifier.getInstance().removeListener(this);
+            var catalog = new AggregateCatalog();
+            catalog.Catalogs.Add(new DirectoryCatalog("Plugins"));
+            var container = new CompositionContainer(catalog);
+            //将部件（part）和宿主程序添加到组合容器
+            try
+            {
+                container.ComposeParts(this);
+            }
+            catch (CompositionException compositionException)
+            {
+                Console.WriteLine(compositionException.ToString());
+            }
         }
+        [ImportMany]
+        public List<AbstractPlugin> plugins { get; set; }
+
 
         public void initializeComponentContents() 
         {
@@ -68,7 +88,10 @@ namespace FrontFramework
             menuTools.Header = translator.getComponentTranslation("Tools");
             menuPrint.Header = translator.getComponentTranslation("Print");
             menuPrintScr.Header = translator.getComponentTranslation("PrintScr");
-            menuDicManager.Header = translator.getComponentTranslation(new String[]{"Dictionary","Manage"});
+            menuDicManager.Header = translator.getComponentTranslation(new String[] { "Dictionary", "Manage" });
+            menuAlarmTest.Header = translator.getComponentTranslation(new String[] { "Alarm", "Test" });
+            menuStartAlarm.Header = translator.getComponentTranslation(new String[] { "Start", "Alarm" });
+            menuStopAlarm.Header = translator.getComponentTranslation(new String[] { "Stop", "Alarm" });
             menuPlugin.Header = translator.getComponentTranslation("Plugin");
             menuPluginManager.Header = translator.getComponentTranslation(new String[]{"Plugin","Manage"});
             menuView.Header = translator.getComponentTranslation("View");
@@ -90,6 +113,8 @@ namespace FrontFramework
             alarmDataGrid.Columns[3].Header = translator.getComponentTranslation("Location");
             alarmDataGrid.Columns[4].Header = translator.getComponentTranslation("System");
             alarmDataGrid.Columns[5].Header = translator.getComponentTranslation("Description");
+            alarmDataGrid.Columns[6].Header = translator.getComponentTranslation("State");
+            PluginInit();
             StationMenuInit();
         }
         public void setTitle(String title) 
@@ -97,9 +122,76 @@ namespace FrontFramework
             this.Title = title;
         }
 
+        private void PluginInit()
+        {
+            int i = 0;
+            // 清空原有显示
+            for (; i < MainMenu.Items.Count; i++) 
+            {
+                if (((MenuItem)MainMenu.Items.GetItemAt(i)).Name.Equals("beginSeparator"))
+                {
+                    i++;
+                    break;
+                }
+            }
+            for (; i < MainMenu.Items.Count - 2; i++)
+            {
+                if (!((MenuItem)MainMenu.Items.GetItemAt(i)).Name.Equals("endSeparator"))
+                {
+                    MainMenu.Items.Remove(MainMenu.Items.GetItemAt(i));
+                }
+                else 
+                {
+                    break;
+                }
+            }
+            ViewSwitchTabControl.Items.Clear();
+            // 添加新显示
+            foreach (AbstractPlugin plugin in plugins)
+            {
+                // menu
+                MenuItem item = new MenuItem();
+                item.Header = translator.getComponentTranslation(plugin.getMenuId().Split(' '));
+                foreach (String str in plugin.getMenuItemsId()) 
+                {
+                    MenuItem childItem = new MenuItem();
+                    childItem.Header = translator.getComponentTranslation(str.Split(' '));
+                    item.Items.Add(childItem);
+                }
+                MainMenu.Items.Insert(MainMenu.Items.Count - 2, item);
+                // view switch menu
+                TabItem tabItem = new TabItem();
+                tabItem.Header = translator.getComponentTranslation(plugin.getViewSwitchMenuId().Split(' '));
+                Menu switchMenu = new Menu();
+                switchMenu.FontSize = 13;
+                foreach (var view in plugin.getViewSwitchPages())
+                {
+                    MenuItem childItem = new MenuItem();
+                    childItem.Header = translator.getComponentTranslation(view.Key.Split(' '));
+                    childItem.Padding = new Thickness(10, 1, 10, 1);
+                    childItem.Name = view.Key.Replace(" ", "");
+                    childItem.Click += viewSwitchMenuClicked;
+                    switchMenu.Items.Add(childItem);
+                }
+                tabItem.Content = switchMenu;
+                ViewSwitchTabControl.Items.Add(tabItem);
+                ViewSwitchTabControl.SelectedIndex = 0;
+                // view switch page
+                foreach (var id2page in plugin.getViewSwitchPages())
+                {
+                    pageDic.Add(id2page.Key.Replace(" ", ""), id2page.Value);
+                }
+            }
+        }
+        private Dictionary<String, Page> pageDic = new Dictionary<string, Page>(); // View Switch Menu ID - Page Thread
+        private void viewSwitchMenuClicked(object sender, EventArgs e)
+        {
+            Console.WriteLine(((MenuItem)sender).Name);
+            MainViewFrame.Content = null;
+            MainViewFrame.Content = pageDic[((MenuItem)sender).Name];
+        }
+
         #region 菜单对应动作
-
-
 
             # region 工具菜单
                 private void dicManagerOnClick(object sender, RoutedEventArgs e)
@@ -289,6 +381,14 @@ namespace FrontFramework
             }
         }
 
+        private void WindowClosed(object sender, EventArgs e)
+        {
+            LanguageChangedNotifier.getInstance().removeListener(this);
+            foreach (AbstractPlugin plugin in plugins)
+            {
+                plugin.closeListeningThread();
+            }
+        }
 
     }
 
@@ -344,10 +444,10 @@ namespace FrontFramework
         {
             switch (((System.Windows.Controls.MenuItem)sender).Name)
             {
-                case "testStartAlarm":
+                case "menuStartAlarm":
                     startAlarm();
                     break;
-                case "testStopAlarm":
+                case "menuStopAlarm":
                     stopAlarm();
                     break;
             }
@@ -451,6 +551,10 @@ namespace FrontFramework
             {
                 Console.WriteLine(er.ToString());
             }
+            foreach (AbstractPlugin plugin in plugins)
+            {
+                plugin.setStationCode(stationCode);
+            }
             comboBoxStation.SelectedValue = stationCode;
         }
         private void stationSelected(object sender, RoutedEventArgs e)
@@ -458,6 +562,10 @@ namespace FrontFramework
             if (comboBoxStation.SelectedValue != null)
             {
                 stationCode = (int)comboBoxStation.SelectedValue;
+                foreach (AbstractPlugin plugin in plugins)
+                {
+                    plugin.setStationCode(stationCode);
+                }
                 propUtil.setStrProp("historyStationCode", stationCode.ToString());
             }
         }

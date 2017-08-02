@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -178,9 +179,9 @@
     <Folder Include="bin\Debug\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PluginExample\PluginExample.csproj">
-      <Project>{529d2e48-6223-4e04-bc06-09d29d47d543}</Project>
-      <Name>PluginExample</Name>
+    <ProjectReference Include="..\PluginDefinition\PluginDefinition.csproj">
+      <Project>{bff1fca5-c961-471b-ab12-50e8e3248dcd}</Project>
+      <Name>PluginDefinition</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

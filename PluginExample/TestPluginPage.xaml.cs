@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace PluginExample
 {
     /// <summary>
-    /// PluginTest.xaml 的交互逻辑
+    /// TestPluginPage.xaml 的交互逻辑
     /// </summary>
-    public partial class PluginTest : Page
+    public partial class TestPluginPage : Page
     {
-        public PluginTest()
+        public TestPluginPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

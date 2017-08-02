@@ -4,8 +4,14 @@ C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExampl
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.csproj.GenerateResource.Cache
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.pdb
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginTest.baml
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginTest.g.cs
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample_MarkupCompile.cache
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.g.resources
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\PluginExample.csprojResolveAssemblyReference.cache
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\TestPluginPage.baml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\TestPluginPage.g.cs
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\bin\Debug\PluginDefinition.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\bin\Debug\PluginDefinition.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\Plugins\PluginExample.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\Plugins\PluginExample.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\AnotherTestPluginPage.baml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginExample\obj\Debug\AnotherTestPluginPage.g.cs

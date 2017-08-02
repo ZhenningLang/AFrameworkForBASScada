@@ -23,6 +23,6 @@ C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramewo
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\LoginWindow.g.cs
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\MainWindow.baml
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\MainWindow.g.cs
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\PluginExample.dll
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\PluginExample.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\FrontFramework.csprojResolveAssemblyReference.cache
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\PluginDefinition.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\PluginDefinition.pdb

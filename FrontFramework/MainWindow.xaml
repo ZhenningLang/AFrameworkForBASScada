@@ -1,7 +1,6 @@
 ﻿<Window x:Class="FrontFramework.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:pe="clr-namespace:PluginExample;assembly=PluginExample"
         Title="MainWindow" 
         MinWidth="800" MinHeight="600"
         Icon="resources/icon.ico" 
@@ -10,7 +9,7 @@
         WindowStartupLocation ="CenterScreen"
         WindowStyle="SingleBorderWindow"
         KeyUp="mainScreenKeyUp"
-        Width="Auto" Height="Auto">
+        Width="Auto" Height="Auto" Closed="WindowClosed">
     <!-- WindowStyle="ThreeDBorderWindow" WindowState="Maximized">  -->
 
     <Grid>
@@ -23,7 +22,7 @@
         <!-- 菜单区 -->
         <Grid Name="MenuArea" DockPanel.Dock="Top" VerticalAlignment="Top" Grid.Row="0">
             <!-- 系统菜单 -->
-            <Menu FontSize="13">
+            <Menu Name="MainMenu" FontSize="13">
                 <MenuItem Name="menuSystem" Header="系统" Padding="10 1 10 1">
                     <MenuItem Name="menuUser" Header="用户" Padding="10 1 10 1">
                         <MenuItem.Icon>
@@ -67,6 +66,10 @@
                             <Image Source="resources/images/dictionary.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Name="menuAlarmTest" Header="报警测试">
+                        <MenuItem Name="menuStartAlarm" Header="开启报警" Click="testMenuClick"/>
+                        <MenuItem Name="menuStopAlarm" Header="关闭报警" Click="testMenuClick"/>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Name="menuPlugin" Header="插件" Padding="10 1 10 1">
                     <MenuItem Name="menuPluginManager" Header="插件管理"/>
@@ -102,20 +105,13 @@
                     </MenuItem>
                 </MenuItem>
 
-                <MenuItem Background="#FFD6D6D6" Width="3"/>
                 <!-- A Separator-->
+                <MenuItem Name="beginSeparator" Background="#FFD6D6D6" Width="3"/>
 
                 <!-- 插件菜单 -->
-                <MenuItem Header="测试" Padding="10 1 10 1">
-                    <MenuItem Name="testStartAlarm" Header="开启报警" Click="testMenuClick"/>
-                    <MenuItem Name="testStopAlarm" Header="关闭报警" Click="testMenuClick"/>
-                </MenuItem>
-                <MenuItem Header="插件1" Padding="10 1 10 1"/>
-                <MenuItem Header="插件2" Padding="10 1 10 1"/>
 
-
-                <MenuItem Background="#FFD6D6D6" Width="3"/>
                 <!-- A Separator-->
+                <MenuItem Name="endSeparator" Background="#FFD6D6D6" Width="3"/>
 
                 <!-- 车站菜单 -->
                 <ComboBox Name="comboBoxStation" Padding="10 1 10 1" SelectionChanged="stationSelected">
@@ -133,27 +129,12 @@
         </Grid>
         <!-- 视图切换区 -->
         <Grid Name="ViewSwitchArea" DockPanel.Dock="Top" VerticalAlignment="Top" Grid.Row="1">
-            <TabControl VerticalAlignment="Top">
+            <TabControl Name="ViewSwitchTabControl" VerticalAlignment="Top">
                 <TabItem Header="行车指挥">
                     <Menu FontSize="13">
                         <MenuItem Header="站场图" Padding="10 1 10 1"></MenuItem>
                         <MenuItem Header="运行图" Padding="10 1 10 1"></MenuItem>
                         <MenuItem Header="列车详细信息" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="设备拓扑图" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="临时限速" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="调度控制区域" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="历史数据下载" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="调度留言" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="发车列表" Padding="10 1 10 1"></MenuItem>
-                    </Menu>
-                </TabItem>
-                <TabItem Header="显示一级菜单">
-                    <Menu FontSize="13">
-                        <MenuItem Header="显示二级菜单1" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="显示二级菜单2" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="显示二级菜单3" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="显示二级菜单4" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="显示二级菜单5" Padding="10 1 10 1"></MenuItem>
                     </Menu>
                 </TabItem>
             </TabControl>
@@ -162,7 +143,7 @@
         <Grid Name="MainView" DockPanel.Dock="Top" Grid.Row="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
                 <ScrollViewer.Content>
-                    <Frame x:Name="MainViewFrame" Margin="0 0 0 0"/>
+                    <Frame x:Name="MainViewFrame" Margin="0 0 0 0" NavigationUIVisibility="Hidden"/>
                 </ScrollViewer.Content>
             </ScrollViewer>
         </Grid>
@@ -172,19 +153,19 @@
                 <Separator DockPanel.Dock="Top" VerticalAlignment="Top"/>
                 <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="3 3 3 3">
                     <DockPanel Margin="0 1 0 1">
-                        <Label Name="labelWaitingSolved" DockPanel.Dock="Left" Content="未消除" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <TextBox DockPanel.Dock="Right" Text="aaa" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
+                        <Label Name="labelWaitingSolved" DockPanel.Dock="Left" Content="未消除" Width="85" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox DockPanel.Dock="Right" Text="aaa" Width="65" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
                     </DockPanel>
                     <DockPanel Margin="0 1 0 1">
-                        <Label Name="labelWaitingConfirmed" DockPanel.Dock="Left" Content="未确认" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <TextBox DockPanel.Dock="Right" Text="bbb" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
+                        <Label Name="labelWaitingConfirmed" DockPanel.Dock="Left" Content="未确认" Width="85" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox DockPanel.Dock="Right" Text="bbb" Width="65" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
                     </DockPanel>
                     <DockPanel Margin="0 1 0 1">
-                        <Button Name="buttonMute" DockPanel.Dock="Left" Content="静音" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0 1 0 1"
+                        <Button Name="buttonMute" DockPanel.Dock="Left" Content="静音" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0 1 0 1"
                                     Click="muteButtonClick"/>
                         <Slider Name="sliderVolume" DockPanel.Dock="Right" Margin="5 0 0 0" PreviewMouseLeftButtonUp="sliderVolumeMouseLeftButtonUp"></Slider>
                     </DockPanel>
-                    <Button Name="buttonDetailedAlarmInfo" Content="详细信息" Width="110" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 1 0 1"/>
+                    <Button Name="buttonDetailedAlarmInfo" Content="详细信息" Width="150" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 1 0 1"/>
                 </StackPanel>
                 <DataGrid Name="alarmDataGrid" CanUserAddRows="False" Margin="3 3 3 3">
                     <DataGrid.Columns>
@@ -194,6 +175,7 @@
                         <DataGridTextColumn Width="2*" Header="地点"/>
                         <DataGridTextColumn Width="1*" Header="系统"/>
                         <DataGridTextColumn Width="5*" Header="描述"/>
+                        <DataGridTextColumn Width="3*" Header="状态"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

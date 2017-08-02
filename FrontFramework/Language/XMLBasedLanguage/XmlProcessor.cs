@@ -200,8 +200,16 @@ namespace FrontFramework.Lang.XMLBasedLanguage
                 }
                 else
                 {
-                    result.result = false;
-                    result.info = "'id = " + id + "' is not found.";
+                    try
+                    {
+                        int.Parse(id);
+                        result.info = id;
+                    }
+                    catch
+                    {
+                        result.result = false;
+                        result.info = "'id = " + id + "' is not found.";
+                    }
                 }
             }
             catch (Exception er)

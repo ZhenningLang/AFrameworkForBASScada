@@ -329,4 +329,40 @@
     <chinese>全屏</chinese>
     <english>Full Screen</english>
   </group>
+  <group id="State">
+    <chinese>状态</chinese>
+    <english>State</english>
+  </group>
+  <group id="Test">
+    <chinese>测试</chinese>
+    <english>Test</english>
+  </group>
+  <group id="Menu">
+    <chinese>菜单</chinese>
+    <english>Menu</english>
+  </group>
+  <group id="Alarm">
+    <chinese>报警</chinese>
+    <english>Alarm</english>
+  </group>
+  <group id="Start">
+    <chinese>开始</chinese>
+    <english>Start</english>
+  </group>
+  <group id="Stop">
+    <chinese>停止</chinese>
+    <english>Stop</english>
+  </group>
+  <group id="Item">
+    <chinese>项</chinese>
+    <english>Item</english>
+  </group>
+  <group id="Switch">
+    <chinese>切换</chinese>
+    <english>Switch</english>
+  </group>
+  <group id="Page">
+    <chinese>页面</chinese>
+    <english>Page</english>
+  </group>
 </translations>
