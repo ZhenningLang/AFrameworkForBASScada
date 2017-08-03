@@ -365,4 +365,24 @@
     <chinese>页面</chinese>
     <english>Page</english>
   </group>
+  <group id="Fas">
+    <chinese>火警</chinese>
+    <english>Fas</english>
+  </group>
+  <group id="Report">
+    <chinese>报告</chinese>
+    <english>Report</english>
+  </group>
+  <group id="Module">
+    <chinese>模块</chinese>
+    <english>Module</english>
+  </group>
+  <group id="Temperature">
+    <chinese>温度</chinese>
+    <english>Temperature</english>
+  </group>
+  <group id="Door">
+    <chinese>门禁</chinese>
+    <english>Door</english>
+  </group>
 </translations>

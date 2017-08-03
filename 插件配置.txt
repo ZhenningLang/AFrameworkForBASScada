@@ -1,0 +1,11 @@
+1. 解决方案中添加项目 -> WPF用户控件库
+
+2. 对新建的项目添加依赖项，分别是
+System.ComponentModel.Composition
+定义接口/抽象类（也就是 Contact ）的项目，即 PluginDefinition
+
+3. 将新建插件项目的输出目录定义为 DirectoryCatalog 添加的地址，正常应该是"..\FrontFramework\bin\Debug\Plugins\"，具体情况可能改变
+
+4. 类库类需要继承Contact（接口/抽象类），即 PluginDefinition.AbstractPlugin
+
+5. 必须重新编译后，才可以进行主项目调试

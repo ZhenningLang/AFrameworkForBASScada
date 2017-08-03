@@ -12,14 +12,23 @@ using System.Windows.Controls;
 namespace PluginExample
 {
     [Export(typeof(AbstractPlugin))]
-    class TestPlugin : AbstractPlugin
+    public class TestPlugin : AbstractPlugin
     {
-        // const
+        // view const
         private static readonly String pluginId = "Test Plugin";
         private static readonly String menuID = "Test Plugin Menu";
         private static readonly String[] menuItemsID = { "Test Plugin Menu Item 1", "Test Plugin Menu Item 2" };
         private static readonly String viewSwitchMenuId = "View Switch Menu";
         private static readonly String[] viewSwitchMenuItemsId = { "Test View Switch Page 1", "Test View Switch Page 2" };
+        // event enum
+        public enum ReceivableEventsIdEnum
+        {
+
+        }
+        public enum EmittedEventsIdEnum
+        {
+
+        }
         // constructor
         public TestPlugin()
         {

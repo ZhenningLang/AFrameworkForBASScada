@@ -134,11 +134,12 @@ namespace FrontFramework
                     break;
                 }
             }
-            for (; i < MainMenu.Items.Count - 2; i++)
+            for (; i < MainMenu.Items.Count; i++)
             {
                 if (!((MenuItem)MainMenu.Items.GetItemAt(i)).Name.Equals("endSeparator"))
                 {
                     MainMenu.Items.Remove(MainMenu.Items.GetItemAt(i));
+                    i--;
                 }
                 else 
                 {
@@ -147,18 +148,22 @@ namespace FrontFramework
             }
             ViewSwitchTabControl.Items.Clear();
             // 添加新显示
+            pageDic.Clear();
             foreach (AbstractPlugin plugin in plugins)
             {
                 // menu
                 MenuItem item = new MenuItem();
-                item.Header = translator.getComponentTranslation(plugin.getMenuId().Split(' '));
-                foreach (String str in plugin.getMenuItemsId()) 
+                if (plugin.getMenuId() != null)
                 {
-                    MenuItem childItem = new MenuItem();
-                    childItem.Header = translator.getComponentTranslation(str.Split(' '));
-                    item.Items.Add(childItem);
+                    item.Header = translator.getComponentTranslation(plugin.getMenuId().Split(' '));
+                    foreach (String str in plugin.getMenuItemsId())
+                    {
+                        MenuItem childItem = new MenuItem();
+                        childItem.Header = translator.getComponentTranslation(str.Split(' '));
+                        item.Items.Add(childItem);
+                    }
+                    MainMenu.Items.Insert(MainMenu.Items.Count - 2, item);
                 }
-                MainMenu.Items.Insert(MainMenu.Items.Count - 2, item);
                 // view switch menu
                 TabItem tabItem = new TabItem();
                 tabItem.Header = translator.getComponentTranslation(plugin.getViewSwitchMenuId().Split(' '));
@@ -181,8 +186,22 @@ namespace FrontFramework
                 {
                     pageDic.Add(id2page.Key.Replace(" ", ""), id2page.Value);
                 }
+                // event listener
+                plugin.sendEvent += pluginEventHappend;
             }
         }
+
+        private void pluginEventHappend(BasEvent e) 
+        {
+            foreach (var plugin in plugins) 
+            {
+                if (e.eventDestination.Contains<String>(plugin.getPluginId())) 
+                {
+                    plugin.trigger(e);
+                }
+            }
+        }
+
         private Dictionary<String, Page> pageDic = new Dictionary<string, Page>(); // View Switch Menu ID - Page Thread
         private void viewSwitchMenuClicked(object sender, EventArgs e)
         {

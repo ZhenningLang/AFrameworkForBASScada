@@ -1,0 +1,14 @@
+﻿<Page x:Class="PluginFAS.AlarmPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+	Title="AlarmPage">
+
+    <Grid>
+        <Image Source="img/平面图.png" Width="500"/>
+        <Image Name="alarmIcon" Source="img/无火警.png" Width="100"/>
+    </Grid>
+</Page>

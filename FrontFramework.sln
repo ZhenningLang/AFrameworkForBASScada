@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginExample", "PluginExam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginDefinition", "PluginDefinition\PluginDefinition.csproj", "{BFF1FCA5-C961-471B-AB12-50E8E3248DCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginFAS", "PluginFAS\PluginFAS.csproj", "{EB92A961-130E-4FCB-8B54-FF1F643917BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginDoor", "PluginDoor\PluginDoor.csproj", "{686FC345-EC63-4ED3-A7BD-FAE8D57E194C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{BFF1FCA5-C961-471B-AB12-50E8E3248DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFF1FCA5-C961-471B-AB12-50E8E3248DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFF1FCA5-C961-471B-AB12-50E8E3248DCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB92A961-130E-4FCB-8B54-FF1F643917BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB92A961-130E-4FCB-8B54-FF1F643917BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB92A961-130E-4FCB-8B54-FF1F643917BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB92A961-130E-4FCB-8B54-FF1F643917BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{686FC345-EC63-4ED3-A7BD-FAE8D57E194C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{686FC345-EC63-4ED3-A7BD-FAE8D57E194C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{686FC345-EC63-4ED3-A7BD-FAE8D57E194C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{686FC345-EC63-4ED3-A7BD-FAE8D57E194C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

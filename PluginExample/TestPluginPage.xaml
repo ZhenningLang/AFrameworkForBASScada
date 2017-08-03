@@ -4,13 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" ShowsNavigationUI="False"
-	Title="PluginTest" d:DesignHeight="1000" d:DesignWidth="2000">
+	Title="PluginTest" d:DesignHeight="500" d:DesignWidth="500">
 
     <Grid Background="Green">
-        <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1,976,1958,5"/>
-        <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,1958,981" Click="Button_Click"/>
-        <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1957,971,0,10"/>
-        <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1957,0,0,981" RenderTransformOrigin="-0.167,1.579"/>
+        <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,457,481"/>
+        <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="151,170,306,311" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="292,312,165,169"/>
+        <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="457,481,0,0" RenderTransformOrigin="-0.167,1.579"/>
 
     </Grid>
 </Page>

@@ -106,17 +106,17 @@ namespace PluginDefinition
         #region 监听注册
 
         public delegate void BasEventHandler(BasEvent basEvent);
-        public event BasEventHandler sendEvent;
+        public BasEventHandler sendEvent;
 
         #endregion
 
         #region 报警消息处理相关
 
         public delegate void BasAlarmHandler(BasAlarm basAlarm);
-        public event BasAlarmHandler sendAlarm;
+        public BasAlarmHandler sendAlarm;
         public abstract void confirmAlarm(BasAlarm basAlarm);
         public delegate void BasAlarmSolvedHandler(BasAlarm basAlarm);
-        public event BasAlarmSolvedHandler sendSolvedAlarm;
+        public BasAlarmSolvedHandler sendSolvedAlarm;
 
         #endregion
     }
@@ -135,9 +135,18 @@ namespace PluginDefinition
     public class BasEvent
     {
         public String eventSource { get; set; }
-        public String eventDestination { get; set; }
+        public List<String> eventDestination { get; set; }
         public String eventName { get; set; }
         public List<Object> eventParas { get; set; }
+        override public String ToString() 
+        {
+            String str = "from: " + eventSource;
+            foreach (var toName in eventDestination) 
+            {
+                str += "\n to: " + toName.ToString();
+            }
+            return str + "\n event name: " + eventName + "\n";
+        }
     }
 
     public enum AlarmLevelEnum
