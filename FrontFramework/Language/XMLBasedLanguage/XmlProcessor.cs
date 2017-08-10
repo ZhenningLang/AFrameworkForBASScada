@@ -65,9 +65,9 @@ namespace FrontFramework.Lang.XMLBasedLanguage
         /// </summary>
         /// <param name="id"> 新字典条目ID </param>
         /// <param name="dic"> 内容 </param>
-        public OptResult addItem(String id, Dictionary<LanguageEnum, String> dic)
+        public OprResult addItem(String id, Dictionary<LanguageEnum, String> dic)
         {
-            OptResult result = new OptResult(true);
+            OprResult result = new OprResult(true);
             // 首先检测是否有重复，否则可能会出现重复数据
             foreach (var item in dic) 
             {
@@ -124,9 +124,9 @@ namespace FrontFramework.Lang.XMLBasedLanguage
         /// </summary>
         /// <param name="id"> 字典条目ID </param>
         /// <param name="dic"> 想要更新的内容 </param>
-        public OptResult editItem(String id, Dictionary<LanguageEnum, String> dic)
+        public OprResult editItem(String id, Dictionary<LanguageEnum, String> dic)
         {
-            OptResult result = new OptResult(true);
+            OprResult result = new OprResult(true);
             try
             {
                 XmlNode node = xmlDoc.SelectSingleNode("//group[@id='" + id + "']");
@@ -159,9 +159,9 @@ namespace FrontFramework.Lang.XMLBasedLanguage
         /// 删除一个翻译条目
         /// </summary>
         /// <param name="id"> 想要删除的字典条目ID </param>
-        public OptResult delItem(String id)
+        public OprResult delItem(String id)
         {            
-            OptResult result = new OptResult(true);
+            OprResult result = new OprResult(true);
             try
             {
                 XmlNode node = xmlDoc.SelectSingleNode("//group[@id='" + id + "']");
@@ -188,9 +188,9 @@ namespace FrontFramework.Lang.XMLBasedLanguage
             return result;
         }
 
-        public OptResult searchByID(String id, LanguageEnum to)
+        public OprResult searchByID(String id, LanguageEnum to)
         {
-            OptResult result = new OptResult(true);
+            OprResult result = new OprResult(true);
             try
             {
                 XmlNode node = xmlDoc.SelectSingleNode("//group[@id='" + id + "']");
@@ -219,9 +219,9 @@ namespace FrontFramework.Lang.XMLBasedLanguage
             }
             return result;
         }
-        public OptResult searchByLanguage(String word, LanguageEnum from, LanguageEnum to)
+        public OprResult searchByLanguage(String word, LanguageEnum from, LanguageEnum to)
         {
-            OptResult result = new OptResult(false);
+            OprResult result = new OprResult(false);
             try
             {
                 XmlNodeList nodeList = xmlDoc.SelectNodes("//group");

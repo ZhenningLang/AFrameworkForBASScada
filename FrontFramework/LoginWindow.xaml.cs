@@ -76,6 +76,8 @@ namespace FrontFramework
             {
                 statusDisplay.Content = translator.getComponentTranslation(new String[]{"Login","Failure"}) + "!";
             }
+            //FrontFramework.Log.LogHelper.writeFuncErrorLog("测试Log4Net日志是否写入", new Exception("ceshi"));
+            //FrontFramework.Log.LogHelper.writeUserOperation("Tester", "Logging", new Object[] { 12, "Hello" }, new FrontFramework.Common.OprResult(true));
         }
 
         private void cancelClick(object sender, RoutedEventArgs e)
@@ -96,6 +98,18 @@ namespace FrontFramework
                     translator.setLanguage(LanguageEnum.ENGLISH, LanguageEnum.CHINESE);
                 }
                 LanguageChangedNotifier.getInstance().notifyAll();
+            }
+        }
+
+        private void LoginKeyEvent(object sender, KeyEventArgs e)
+        {
+            if (e.Key.ToString().Equals("Return"))
+            {
+                loginClick(null, null);
+            }
+            else if (e.Key.ToString().Equals("Escape"))
+            {
+                cancelClick(null, null);
             }
         }
     }

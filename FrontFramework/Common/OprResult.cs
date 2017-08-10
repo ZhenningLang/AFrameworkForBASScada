@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace FrontFramework.Common
 {
-    class OptResult
+    class OprResult
     {
-        public OptResult()
+        public OprResult()
         {
             this.result = true;
             this.info = "";
         }
-        public OptResult(Boolean result)
+        public OprResult(Boolean result)
         {
             this.result = result;
             this.info = "";
         }
-        public OptResult(Boolean result, String info)
+        public OprResult(Boolean result, String info)
         {
             this.result = result;
             this.info = info;

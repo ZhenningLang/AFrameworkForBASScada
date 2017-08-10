@@ -2,3 +2,4 @@ C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginDefini
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginDefinition\bin\Debug\PluginDefinition.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginDefinition\obj\Debug\PluginDefinition.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginDefinition\obj\Debug\PluginDefinition.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginDefinition\obj\Debug\PluginDefinition.csprojResolveAssemblyReference.cache

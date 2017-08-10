@@ -101,11 +101,11 @@ namespace FrontFramework.Language
             return rVal;
 
         }
-        public OptResult addNewWordToDict(String id, Dictionary<LanguageEnum, String> dic) 
+        public OprResult addNewWordToDict(String id, Dictionary<LanguageEnum, String> dic) 
         {
             return processor.addItem(id, dic);
         }
-        public OptResult delWordFromDict(String id)
+        public OprResult delWordFromDict(String id)
         {
             return processor.delItem(id);
         }

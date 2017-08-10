@@ -68,7 +68,7 @@ namespace FrontFramework.Language.Views
                 chinese = chinese,
                 english = english
             };
-            OptResult r = translator.addNewWordToDict(newData.id, new Dictionary<LanguageEnum, string>()
+            OprResult r = translator.addNewWordToDict(newData.id, new Dictionary<LanguageEnum, string>()
             {
                 {LanguageEnum.CHINESE, newData.chinese},
                 {LanguageEnum.ENGLISH, newData.english}
@@ -123,7 +123,7 @@ namespace FrontFramework.Language.Views
                     break;
                 }
             }
-            OptResult r = translator.delWordFromDict(id);
+            OprResult r = translator.delWordFromDict(id);
             if (r.result == true)
             {
                 gridData.Remove(rmData);

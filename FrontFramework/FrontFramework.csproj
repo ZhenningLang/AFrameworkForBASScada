@@ -11,6 +11,7 @@
     <AssemblyName>FrontFramework</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -34,9 +35,67 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\Spring4net\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\log4net.4.5\release\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="Spring.Aop">
+      <HintPath>..\Spring4net\Spring.Aop.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Core">
+      <HintPath>..\Spring4net\Spring.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Data">
+      <HintPath>..\Spring4net\Spring.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Data.NHibernate20">
+      <HintPath>..\Spring4net\Spring.Data.NHibernate20.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Data.NHibernate21">
+      <HintPath>..\Spring4net\Spring.Data.NHibernate21.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Data.NHibernate30">
+      <HintPath>..\Spring4net\Spring.Data.NHibernate30.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Messaging">
+      <HintPath>..\Spring4net\Spring.Messaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Messaging.Nms">
+      <HintPath>..\Spring4net\Spring.Messaging.Nms.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Scheduling.Quartz">
+      <HintPath>..\Spring4net\Spring.Scheduling.Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Services">
+      <HintPath>..\Spring4net\Spring.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Template.Velocity">
+      <HintPath>..\Spring4net\Spring.Template.Velocity.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Testing.Microsoft">
+      <HintPath>..\Spring4net\Spring.Testing.Microsoft.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Testing.NUnit">
+      <HintPath>..\Spring4net\Spring.Testing.NUnit.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Web">
+      <HintPath>..\Spring4net\Spring.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Web.Extensions">
+      <HintPath>..\Spring4net\Spring.Web.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Web.Mvc">
+      <HintPath>..\Spring4net\Spring.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -54,16 +113,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Common\OptResult.cs" />
+    <Compile Include="Common\OprResult.cs" />
+    <Compile Include="Common\Views\AboutBox.xaml.cs">
+      <DependentUpon>AboutBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\Views\Alert.xaml.cs">
       <DependentUpon>Alert.xaml</DependentUpon>
     </Compile>
     <Compile Include="Enums\LanguageEnum.cs" />
     <Compile Include="Enums\ScreenStateEnum.cs" />
     <Compile Include="Enums\VolumnEnum.cs" />
-    <Compile Include="Interfaces\ComponentDynamicTranslate.cs" />
+    <Compile Include="Help\DocHelper.cs" />
+    <Compile Include="Help\IHelper.cs" />
+    <Compile Include="Help\OnlineHelper.cs" />
+    <Compile Include="Language\ComponentDynamicTranslate.cs" />
     <Compile Include="Language\LanguageChangedNotifier.cs" />
     <Compile Include="Language\Translator.cs" />
+    <Compile Include="Language\TranslatorFactory.cs" />
     <Compile Include="Language\Views\Add.xaml.cs">
       <DependentUpon>Add.xaml</DependentUpon>
     </Compile>
@@ -78,11 +144,15 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Log\LogUtil.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Station\StationInfoManager.cs" />
     <Compile Include="Tests\LanguageTester.cs" />
+    <Compile Include="Utils\Print\PrintHelper.cs" />
+    <Compile Include="Utils\PropUtilFactory.cs" />
+    <Compile Include="Utils\Spring\SpringUtil.cs" />
     <Compile Include="Utils\XmlBasedPropUtil.cs" />
     <Compile Include="Utils\PropertyUtilInterface.cs" />
     <Resource Include="resources\images\leftArrow.png" />
@@ -102,8 +172,18 @@
     <Resource Include="resources\images\transfer.png" />
     <Resource Include="resources\images\test.png" />
     <Resource Include="resources\images\white.png" />
+    <Resource Include="resources\images\doublePage.png" />
+    <Resource Include="resources\images\quadruplePage.png" />
+    <Resource Include="resources\images\singlePage.png" />
+    <Resource Include="resources\images\multiScreen.png" />
+    <Resource Include="resources\images\addWindow.png" />
+    <Resource Include="resources\images\binding.png" />
     <Content Include="resources\sounds\alarm.wav" />
     <Resource Include="resources\configs\config.xml" />
+    <Page Include="Common\Views\AboutBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Common\Views\Alert.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,6 +243,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Log4Net.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

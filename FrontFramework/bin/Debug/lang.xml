@@ -385,4 +385,20 @@
     <chinese>门禁</chinese>
     <english>Door</english>
   </group>
+  <group id="Single">
+    <chinese>单</chinese>
+    <english>Single</english>
+  </group>
+  <group id="Double">
+    <chinese>双</chinese>
+    <english>Double</english>
+  </group>
+  <group id="MultiPage">
+    <chinese>多页面</chinese>
+    <english>MultiPage</english>
+  </group>
+  <group id="Quadruple">
+    <chinese>四</chinese>
+    <english>Quadruple</english>
+  </group>
 </translations>

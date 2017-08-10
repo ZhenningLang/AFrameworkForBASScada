@@ -9,9 +9,9 @@ namespace FrontFramework.Utils
 {
     interface PropertyUtilInterface
     {
-        OptResult loadProperty(Object obj);
-        OptResult getStrProp(String name);
-        OptResult setStrProp(String name, String value);
+        OprResult loadProperty(Object obj);
+        OprResult getStrProp(String name);
+        OprResult setStrProp(String name, String value);
         /// <summary>
         /// value - <propName, propVal>
         /// </summary>

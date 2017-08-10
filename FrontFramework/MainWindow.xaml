@@ -86,19 +86,51 @@
                             <Image Source="resources/images/float window.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Name="multiPageMenu" Header="多页">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/doublePage.png"/>
+                        </MenuItem.Icon>
+                        <MenuItem Name="singlePageMenu" Header="单页" Click="singlePageOnClick">
+                            <MenuItem.Icon>
+                                <Image Source="resources/images/singlePage.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="doublePageMenu" Header="双页" Click="doublePageOnClick">
+                            <MenuItem.Icon>
+                                <Image Source="resources/images/doublePage.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Name="multiScreenMenu" Header="多屏幕扩展">
+                        <MenuItem.Icon>
+                            <Image Source="resources/images/multiScreen.png"/>
+                        </MenuItem.Icon>
+                        <MenuItem Name="addWindowMenu" Header="添加">
+                            <MenuItem.Icon>
+                                <Image Source="resources/images/addWindow.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="bindingMenu" Header="绑定">
+                            <MenuItem.Icon>
+                                <Image Source="resources/images/binding.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Name="menuHelp" Header="帮助" Padding="10 1 10 1">
-                    <MenuItem Name="menuHelpDoc" Header="帮助文档">
+                    <MenuItem Name="menuHelpDoc" Header="帮助文档" Click="docHelpOnClick">
                         <MenuItem.Icon>
                             <Image Source="resources/images/document help.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="menuHelpOnline" Header="在线帮助">
+                    <MenuItem Name="menuHelpOnline" Header="在线帮助" Click="onlineHelpOnClick">
                         <MenuItem.Icon>
                             <Image Source="resources/images/online help.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="menuAbout" Header="关于">
+                    <Separator/>
+                    <MenuItem Name="menuAbout" Header="关于" Click="aboutClick">
                         <MenuItem.Icon>
                             <Image Source="resources/images/about.png"/>
                         </MenuItem.Icon>
@@ -130,20 +162,29 @@
         <!-- 视图切换区 -->
         <Grid Name="ViewSwitchArea" DockPanel.Dock="Top" VerticalAlignment="Top" Grid.Row="1">
             <TabControl Name="ViewSwitchTabControl" VerticalAlignment="Top">
-                <TabItem Header="行车指挥">
+                <TabItem Header="***">
                     <Menu FontSize="13">
-                        <MenuItem Header="站场图" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="运行图" Padding="10 1 10 1"></MenuItem>
-                        <MenuItem Header="列车详细信息" Padding="10 1 10 1"></MenuItem>
+                        <MenuItem Header="***" Padding="10 1 10 1"></MenuItem>
                     </Menu>
                 </TabItem>
             </TabControl>
         </Grid>
         <!-- 视图区 -->
         <Grid Name="MainView" DockPanel.Dock="Top" Grid.Row="2">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Column="0">
                 <ScrollViewer.Content>
-                    <Frame x:Name="MainViewFrame" Margin="0 0 0 0" NavigationUIVisibility="Hidden"/>
+                    <Frame x:Name="MainViewFrameA" Margin="0 0 0 0" NavigationUIVisibility="Hidden"/>
+                </ScrollViewer.Content>
+            </ScrollViewer>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="3"></GridSplitter>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Column="2">
+                <ScrollViewer.Content>
+                    <Frame x:Name="MainViewFrameB" Margin="0 0 0 0" NavigationUIVisibility="Hidden"/>
                 </ScrollViewer.Content>
             </ScrollViewer>
         </Grid>
@@ -153,29 +194,29 @@
                 <Separator DockPanel.Dock="Top" VerticalAlignment="Top"/>
                 <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="3 3 3 3">
                     <DockPanel Margin="0 1 0 1">
-                        <Label Name="labelWaitingSolved" DockPanel.Dock="Left" Content="未消除" Width="85" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <TextBox DockPanel.Dock="Right" Text="aaa" Width="65" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
+                        <Label Name="labelWaitingSolved" DockPanel.Dock="Left" Content="***" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox DockPanel.Dock="Right" Text="***" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
                     </DockPanel>
                     <DockPanel Margin="0 1 0 1">
-                        <Label Name="labelWaitingConfirmed" DockPanel.Dock="Left" Content="未确认" Width="85" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <TextBox DockPanel.Dock="Right" Text="bbb" Width="65" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
+                        <Label Name="labelWaitingConfirmed" DockPanel.Dock="Left" Content="***" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox DockPanel.Dock="Right" Text="***" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
                     </DockPanel>
                     <DockPanel Margin="0 1 0 1">
-                        <Button Name="buttonMute" DockPanel.Dock="Left" Content="静音" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0 1 0 1"
+                        <Button Name="buttonMute" DockPanel.Dock="Left" Content="***" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0 1 0 1"
                                     Click="muteButtonClick"/>
-                        <Slider Name="sliderVolume" DockPanel.Dock="Right" Margin="5 0 0 0" PreviewMouseLeftButtonUp="sliderVolumeMouseLeftButtonUp"></Slider>
+                        <Slider Name="sliderVolume" DockPanel.Dock="Right" Margin="5 0 0 0" PreviewMouseLeftButtonUp="sliderVolumeMouseLeftButtonUp" MinWidth="75"></Slider>
                     </DockPanel>
-                    <Button Name="buttonDetailedAlarmInfo" Content="详细信息" Width="150" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 1 0 1"/>
+                    <Button Name="buttonDetailedAlarmInfo" Content="***" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 1 0 1"/>
                 </StackPanel>
                 <DataGrid Name="alarmDataGrid" CanUserAddRows="False" Margin="3 3 3 3">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="1*" Header="类型"/>
-                        <DataGridTextColumn Width="1*" Header="级别"/>
-                        <DataGridTextColumn Width="2*" Header="时间"/>
-                        <DataGridTextColumn Width="2*" Header="地点"/>
-                        <DataGridTextColumn Width="1*" Header="系统"/>
-                        <DataGridTextColumn Width="5*" Header="描述"/>
-                        <DataGridTextColumn Width="3*" Header="状态"/>
+                        <DataGridTextColumn Width="1*" Header="***"/>
+                        <DataGridTextColumn Width="1*" Header="***"/>
+                        <DataGridTextColumn Width="2*" Header="***"/>
+                        <DataGridTextColumn Width="2*" Header="***"/>
+                        <DataGridTextColumn Width="1*" Header="***"/>
+                        <DataGridTextColumn Width="5*" Header="***"/>
+                        <DataGridTextColumn Width="3*" Header="***"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

@@ -22,8 +22,8 @@ namespace FrontFramework.Language
         String getComponentTranslation(String id);
         String getComponentTranslation(String[] ids, String delimiter = " ");
         Dictionary<String, Dictionary<LanguageEnum, String>> getAllWords();
-        OptResult addNewWordToDict(String id, Dictionary<LanguageEnum, String> dic);
-        OptResult delWordFromDict(String id);
+        OprResult addNewWordToDict(String id, Dictionary<LanguageEnum, String> dic);
+        OprResult delWordFromDict(String id);
         void recoveryFromHistory();
     }
 }

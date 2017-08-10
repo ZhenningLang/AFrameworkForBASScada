@@ -21,9 +21,9 @@ namespace FrontFramework.Utils
         private static String fileName;
         private static XmlDocument xmlDoc;
         private static Dictionary<String, String> props = new Dictionary<string, string>();
-        public OptResult loadProperty(Object obj) 
+        public OprResult loadProperty(Object obj) 
         {
-            OptResult result = new OptResult(true);
+            OprResult result = new OprResult(true);
             try
             {
                 fileName = (String)obj;
@@ -45,9 +45,9 @@ namespace FrontFramework.Utils
             }
             return result;
         }
-        public OptResult getStrProp(String name)
+        public OprResult getStrProp(String name)
         {
-            OptResult result = new OptResult(true);
+            OprResult result = new OprResult(true);
             if (props.ContainsKey(name))
             {
                 result.info = props[name];
@@ -58,9 +58,9 @@ namespace FrontFramework.Utils
             }
             return result;
         }
-        public OptResult setStrProp(String name, String value) 
+        public OprResult setStrProp(String name, String value) 
         {
-            OptResult result = new OptResult(true);
+            OprResult result = new OprResult(true);
             try
             {
                 XmlElement node = (XmlElement)xmlDoc.SelectSingleNode("//property[@id='" + name + "']");
