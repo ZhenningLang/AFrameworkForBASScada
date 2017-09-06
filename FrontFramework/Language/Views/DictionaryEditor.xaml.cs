@@ -1,7 +1,8 @@
-﻿using FrontFramework.Common;
+﻿using Common;
+using Enumeration;
+using FrontFramework.Common;
 using FrontFramework.Common.Views;
 using FrontFramework.Enums;
-using FrontFramework.Interfaces;
 using FrontFramework.Language;
 using FrontFramework.Language.Views;
 using System;
@@ -18,6 +19,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
+using Translation;
+using Translation.XMLBasedLanguage;
 
 namespace FrontFramework.Language.Views
 {
@@ -27,7 +30,7 @@ namespace FrontFramework.Language.Views
     public partial class DictionaryEditor : Window, ComponentDynamicTranslate
     {
         private List<TransDataModel> gridData = null;
-        private Translator translator = TranslatorBasedOnXML.getTranslator();
+        private ITranslator translator = TranslatorBasedOnXML.getTranslator();
         public DictionaryEditor(Window father)
         {
             InitializeComponent();
@@ -68,7 +71,7 @@ namespace FrontFramework.Language.Views
                 chinese = chinese,
                 english = english
             };
-            OprResult r = translator.addNewWordToDict(newData.id, new Dictionary<LanguageEnum, string>()
+            OptResult r = translator.addNewWordToDict(newData.id, new Dictionary<LanguageEnum, string>()
             {
                 {LanguageEnum.CHINESE, newData.chinese},
                 {LanguageEnum.ENGLISH, newData.english}
@@ -123,7 +126,7 @@ namespace FrontFramework.Language.Views
                     break;
                 }
             }
-            OprResult r = translator.delWordFromDict(id);
+            OptResult r = translator.delWordFromDict(id);
             if (r.result == true)
             {
                 gridData.Remove(rmData);

@@ -1,17 +1,23 @@
 ﻿<Window x:Class="FrontFramework.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:myControl="clr-namespace:FrontFramework.Common.Views"
         Title="MainWindow" 
         MinWidth="800" MinHeight="600"
         Icon="resources/icon.ico" 
-        FontSize="13" 
+        FontSize="16" 
         FontFamily="等线"
         WindowStartupLocation ="CenterScreen"
         WindowStyle="SingleBorderWindow"
         KeyUp="mainScreenKeyUp"
-        Width="Auto" Height="Auto" Closed="WindowClosed">
+        Width="Auto" Height="Auto" Closed="WindowClosed" Background="#FFF0F0F0">
     <!-- WindowStyle="ThreeDBorderWindow" WindowState="Maximized">  -->
-
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="0 1 0 1"/>
+            <Setter Property="Padding" Value="10 0 10 0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -22,7 +28,7 @@
         <!-- 菜单区 -->
         <Grid Name="MenuArea" DockPanel.Dock="Top" VerticalAlignment="Top" Grid.Row="0">
             <!-- 系统菜单 -->
-            <Menu Name="MainMenu" FontSize="13">
+            <Menu Name="MainMenu" FontSize="16">
                 <MenuItem Name="menuSystem" Header="系统" Padding="10 1 10 1">
                     <MenuItem Name="menuUser" Header="用户" Padding="10 1 10 1">
                         <MenuItem.Icon>
@@ -87,33 +93,38 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator></Separator>
-                    <MenuItem Name="multiPageMenu" Header="多页">
+                    <MenuItem Name="multiPageMenu" Header="多页" PreviewMouseLeftButtonUp="multiPageMenuOnClick">
                         <MenuItem.Icon>
                             <Image Source="resources/images/doublePage.png"/>
                         </MenuItem.Icon>
                         <MenuItem Name="singlePageMenu" Header="单页" Click="singlePageOnClick">
                             <MenuItem.Icon>
-                                <Image Source="resources/images/singlePage.png"/>
+                                <Image Name="singlePageCheckedImg" Source="resources/images/checked.png"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Name="doublePageMenu" Header="双页" Click="doublePageOnClick">
                             <MenuItem.Icon>
-                                <Image Source="resources/images/doublePage.png"/>
+                                <Image Name="doublePageCheckedImg" Source="resources/images/checked.png" Visibility="Hidden"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Name="multiScreenMenu" Header="多屏幕扩展">
+                    <MenuItem Name="multiScreenMenu" Header="多屏幕扩展" PreviewMouseLeftButtonUp="multiScreenMenuOnClick">
                         <MenuItem.Icon>
                             <Image Source="resources/images/multiScreen.png"/>
                         </MenuItem.Icon>
-                        <MenuItem Name="addWindowMenu" Header="添加">
+                        <MenuItem Name="addWindowMenu" Header="添加" Click="addWindowMenuOnClick">
                             <MenuItem.Icon>
                                 <Image Source="resources/images/addWindow.png"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Name="bindingMenu" Header="绑定">
+                        <MenuItem Name="bindingMenu" Header="绑定" Click="bindingOnClick">
                             <MenuItem.Icon>
                                 <Image Source="resources/images/binding.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Name="unbindingMenu" Header="解绑" Click="unbindingOnClick">
+                            <MenuItem.Icon>
+                                <Image Source="resources/images/disbinding.png"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
@@ -161,9 +172,9 @@
         </Grid>
         <!-- 视图切换区 -->
         <Grid Name="ViewSwitchArea" DockPanel.Dock="Top" VerticalAlignment="Top" Grid.Row="1">
-            <TabControl Name="ViewSwitchTabControl" VerticalAlignment="Top">
-                <TabItem Header="***">
-                    <Menu FontSize="13">
+            <TabControl Name="ViewSwitchTabControl" VerticalAlignment="Top" Background="#FFF0F0F0">
+                <TabItem Header="***" Background="#FFF0F0F0">
+                    <Menu FontSize="16">
                         <MenuItem Header="***" Padding="10 1 10 1"></MenuItem>
                     </Menu>
                 </TabItem>
@@ -172,17 +183,43 @@
         <!-- 视图区 -->
         <Grid Name="MainView" DockPanel.Dock="Top" Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Name="mainViewCol1Def"></ColumnDefinition>
+                <ColumnDefinition Name="mainViewCol2Def" Width="0"></ColumnDefinition>
+                <ColumnDefinition Name="mainViewCol3Def" Width="0"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Column="0">
+            <Border Name="MainViewFrameA_Border" BorderBrush="LightGray" BorderThickness="3" CornerRadius="5" Grid.Column="0" Visibility="Hidden">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0"
+                          Color="LightGray"  
+                          Opacity="1"  
+                          BlurRadius="10"/>
+                </Border.Effect>
+            </Border>
+            <Image Name="viewALockedImage" Source="resources/images/binding.png" 
+                   Grid.Column="0" Width="20" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Hidden"/>
+            <ScrollViewer Name="scrollViewerA" ScrollChanged="scrollViewerA_ScrollChanged"
+                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True" 
+                          Grid.Column="0" MouseLeftButtonUp="MainViewFrameA_OnClick" 
+                          PreviewMouseDown="scrollViewerA_PreviewMouseDown" PreviewMouseUp="scrollViewerA_PreviewMouseUp" >
                 <ScrollViewer.Content>
                     <Frame x:Name="MainViewFrameA" Margin="0 0 0 0" NavigationUIVisibility="Hidden"/>
                 </ScrollViewer.Content>
             </ScrollViewer>
-            <GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="3"></GridSplitter>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Column="2">
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="3" MouseDoubleClick="GridSplitter_MouseDoubleClick"/>
+            <Border Name="MainViewFrameB_Border" BorderBrush="LightGray" BorderThickness="3" CornerRadius="5" Grid.Column="2" Visibility="Hidden">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0"
+                          Color="LightGray"  
+                          Opacity="1"  
+                          BlurRadius="10"/>
+                </Border.Effect>
+            </Border>
+            <Image Name="viewBLockedImage" Source="resources/images/binding.png"
+                   Grid.Column="2" Width="20" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Hidden"/>
+            <ScrollViewer  Name="scrollViewerB" ScrollChanged="scrollViewerB_ScrollChanged"
+                           VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True" 
+                           Grid.Column="2" MouseLeftButtonUp="MainViewFrameB_OnClick" 
+                           PreviewMouseDown="scrollViewerB_PreviewMouseDown" PreviewMouseUp="scrollViewerB_PreviewMouseUp">
                 <ScrollViewer.Content>
                     <Frame x:Name="MainViewFrameB" Margin="0 0 0 0" NavigationUIVisibility="Hidden"/>
                 </ScrollViewer.Content>
@@ -202,11 +239,10 @@
                         <TextBox DockPanel.Dock="Right" Text="***" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
                     </DockPanel>
                     <DockPanel Margin="0 1 0 1">
-                        <Button Name="buttonMute" DockPanel.Dock="Left" Content="***" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0 1 0 1"
-                                    Click="muteButtonClick"/>
+                        <Button Name="buttonMute" DockPanel.Dock="Left" Content="***" Margin="0 1 0 1" Click="muteButtonClick"/>
                         <Slider Name="sliderVolume" DockPanel.Dock="Right" Margin="5 0 0 0" PreviewMouseLeftButtonUp="sliderVolumeMouseLeftButtonUp" MinWidth="75"></Slider>
                     </DockPanel>
-                    <Button Name="buttonDetailedAlarmInfo" Content="***" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 1 0 1"/>
+                    <Button Name="buttonDetailedAlarmInfo" Content="***" Margin="0 1 0 1"/>
                 </StackPanel>
                 <DataGrid Name="alarmDataGrid" CanUserAddRows="False" Margin="3 3 3 3">
                     <DataGrid.Columns>

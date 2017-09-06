@@ -1,6 +1,6 @@
-﻿using FrontFramework.Enums;
+﻿using Enumeration;
+using FrontFramework.Enums;
 using FrontFramework.Help;
-using FrontFramework.Interfaces;
 using FrontFramework.Language;
 using FrontFramework.Station;
 using FrontFramework.Utils;
@@ -30,6 +30,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
+using Translation;
 
 namespace FrontFramework
 {
@@ -39,8 +40,8 @@ namespace FrontFramework
     public partial class MainWindow: Window, ComponentDynamicTranslate
     {
         // 单例变量
-        private PropertyUtilInterface propUtil = null;
-        private Translator translator = null;
+        private static PropertyUtilInterface propUtil = null;
+        private static ITranslator translator = null;
 
         public MainWindow()
         {
@@ -116,6 +117,17 @@ namespace FrontFramework
             alarmDataGrid.Columns[4].Header = translator.getComponentTranslation("System");
             alarmDataGrid.Columns[5].Header = translator.getComponentTranslation("Description");
             alarmDataGrid.Columns[6].Header = translator.getComponentTranslation("State");
+            multiMode = PropUtilFactory.getPropUtil().getStrProp("multiMode").info;
+            if (multiMode.Equals("multipage"))
+            {
+                multiScreenMenu.Foreground = new SolidColorBrush(Colors.Gray);
+                multiScreenMenu.Items.Clear();
+            }
+            else
+            {
+                multiPageMenu.Foreground = new SolidColorBrush(Colors.Gray);
+                multiPageMenu.Items.Clear();
+            }
             PluginInit();
             StationMenuInit();
         }
@@ -329,23 +341,242 @@ namespace FrontFramework
             }
         }
 
+        /////////////////////////////////// 多视图功能 //////////////////////////////////////
+        private static String multiMode; // multipage or multiscreen
+        private void multiPageMenuOnClick(object sender, RoutedEventArgs e)
+        {
+            if (multiMode.Equals("multiscreen") && ((MenuItem)e.Source).Name.Equals("multiPageMenu"))
+            {
+                multiMode = "multipage";
+                propUtil.setStrProp("multiMode", "multipage");
+                this.Visibility = Visibility.Hidden;
+                new MainWindow().Show();
+                this.Close();
+            }
+        }
+        private void multiScreenMenuOnClick(object sender, RoutedEventArgs e)
+        {
+            if (multiMode.Equals("multipage") && ((MenuItem)e.Source).Name.Equals("multiScreenMenu"))
+            {
+                multiMode = "multiscreen";
+                propUtil.setStrProp("multiMode", "multiscreen");
+                this.Visibility = Visibility.Hidden;
+                new MainWindow().Show();
+                this.Close();
+            }
+        }
         private void viewSwitchMenuClicked(object sender, EventArgs e)
         {
-            Console.WriteLine(((MenuItem)sender).Name);
-            MainViewFrameA.Content = null;
-            MainViewFrameA.Content = pageDic[((MenuItem)sender).Name];
+            if (selectedPageIndex == 0)
+            {
+                if (!pageDic[((MenuItem)sender).Name].Equals(MainViewFrameA.Content))
+                {
+                    if (pageDic[((MenuItem)sender).Name].Equals(MainViewFrameB.Content))
+                    {
+                        MainViewFrameB.Content = null;
+                    }
+                    MainViewFrameA.Content = null;
+                    MainViewFrameA.Content = pageDic[((MenuItem)sender).Name];
+                    viewA_Page = pageDic[((MenuItem)sender).Name];
+                    selectedPage = viewA_Page;
+                    if (pageLocked.Contains(viewA_Page))
+                    {
+                        viewALockedImage.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        viewALockedImage.Visibility = Visibility.Hidden;
+                    }
+                }
+            }
+            else
+            {
+                if (!pageDic[((MenuItem)sender).Name].Equals(MainViewFrameB.Content))
+                {
+                    if (pageDic[((MenuItem)sender).Name].Equals(MainViewFrameA.Content))
+                    {
+                        MainViewFrameA.Content = null;
+                    }
+                    MainViewFrameB.Content = null;
+                    MainViewFrameB.Content = pageDic[((MenuItem)sender).Name];
+                    viewB_Page = pageDic[((MenuItem)sender).Name];
+                    selectedPage = viewB_Page;
+                    if (pageLocked.Contains(viewB_Page))
+                    {
+                        viewBLockedImage.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        viewBLockedImage.Visibility = Visibility.Hidden;
+                    }
+                }
+            }
         }
 
+        private PageModeEnum pageMode = PageModeEnum.SINGLE_PAGE; // 针对一个窗口的视图模式：single double
+        private int selectedPageIndex = 0; // 0 是左侧窗口，1 是右侧窗口
+
+        private void setSelectedPageIndex(int selectedPageIndex)
+        {
+            if (pageMode.Equals(PageModeEnum.DOUBLE_PAGE))
+            {
+                if (selectedPageIndex == 0)
+                {
+                    MainViewFrameA_Border.Visibility = Visibility.Visible;
+                    MainViewFrameB_Border.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    MainViewFrameA_Border.Visibility = Visibility.Hidden;
+                    MainViewFrameB_Border.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                MainViewFrameA_Border.Visibility = Visibility.Hidden;
+                MainViewFrameB_Border.Visibility = Visibility.Hidden;
+            }
+            this.selectedPageIndex = selectedPageIndex;
+        }
         private void singlePageOnClick(object sender, RoutedEventArgs e)
         {
-
+            if (pageMode.Equals(PageModeEnum.DOUBLE_PAGE))
+            {
+                pageMode = PageModeEnum.SINGLE_PAGE;
+                // checked in menu
+                singlePageCheckedImg.Visibility = Visibility.Visible;
+                doublePageCheckedImg.Visibility = Visibility.Hidden;
+                MainViewFrameA_Border.Visibility = Visibility.Hidden;
+                MainViewFrameB_Border.Visibility = Visibility.Hidden;
+                mainViewCol2Def.Width = new System.Windows.GridLength(0);
+                if (selectedPageIndex == 0)
+                {
+                    mainViewCol3Def.Width = new System.Windows.GridLength(0);
+                }
+                else
+                {
+                    mainViewCol1Def.Width = new System.Windows.GridLength(0);
+                }
+            }
         }
 
         private void doublePageOnClick(object sender, RoutedEventArgs e)
         {
+            if (pageMode.Equals(PageModeEnum.SINGLE_PAGE))
+            {
+                pageMode = PageModeEnum.DOUBLE_PAGE;
+                singlePageCheckedImg.Visibility = Visibility.Hidden;
+                doublePageCheckedImg.Visibility = Visibility.Visible;
+                mainViewCol1Def.Width = new System.Windows.GridLength(1, GridUnitType.Star);
+                mainViewCol2Def.Width = new System.Windows.GridLength(1, GridUnitType.Auto);
+                mainViewCol3Def.Width = new System.Windows.GridLength(1, GridUnitType.Star);
+                if (selectedPageIndex == 0)
+                {
+                    MainViewFrameA_Border.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    MainViewFrameB_Border.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private Page selectedPage = null;
+        private Page viewA_Page = null;
+        private Page viewB_Page = null;
+        private void MainViewFrameA_OnClick(object sender, MouseButtonEventArgs e)
+        {
+            setSelectedPageIndex(0);
+            selectedPage = viewA_Page;
+        }
+
+        private void MainViewFrameB_OnClick(object sender, MouseButtonEventArgs e)
+        {
+            setSelectedPageIndex(1);
+            selectedPage = viewB_Page;
+        }
+
+        private void GridSplitter_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            mainViewCol1Def.Width = new System.Windows.GridLength(1, GridUnitType.Star);
+            mainViewCol3Def.Width = new System.Windows.GridLength(1, GridUnitType.Star);
+        }
+
+        ///////////////////////////////////////////// 多屏幕绑定功能 ////////////////////////////////////////////////////
+        private static HashSet<Page> pageLocked = new HashSet<Page>();
+        private static Dictionary<Page, ViewState> pageStates = new Dictionary<Page, ViewState>();
+        /// <summary>
+        /// 添加一个新的视图
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addWindowMenuOnClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow appendWindow = new MainWindow();
+            appendWindow.Show();
+            appendWindow.Top = this.Top + 50;
+            appendWindow.Left = this.Left + 50;
+        }
+        private void bindingOnClick(object sender, RoutedEventArgs e)
+        {
+            if (selectedPage != null && !pageLocked.Contains(selectedPage))
+            {
+                pageLocked.Add(selectedPage);
+                if (selectedPageIndex == 0)
+                {
+                    viewALockedImage.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    viewBLockedImage.Visibility = Visibility.Visible;
+                }
+            }
+        }
+        private void unbindingOnClick(object sender, RoutedEventArgs e)
+        {
+            if (pageLocked.Contains(selectedPage))
+            {
+                pageLocked.Remove(selectedPage);
+                if (selectedPageIndex == 0)
+                {
+                    viewALockedImage.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    viewBLockedImage.Visibility = Visibility.Hidden;
+                }
+            }
+        }
+        private void calMinScrollDis() 
+        {
+
+        }
+        private void scrollViewerA_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
 
         }
 
+        private void scrollViewerB_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+
+        }
+
+        private void scrollViewerA_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void scrollViewerB_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void scrollViewerA_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void scrollViewerB_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
 
     }
 
@@ -633,7 +864,7 @@ namespace FrontFramework
                 TabItem tabItem = new TabItem();
                 tabItem.Header = translator.getComponentTranslation(plugin.getViewSwitchMenuId().Split(' '));
                 Menu switchMenu = new Menu();
-                switchMenu.FontSize = 13;
+                switchMenu.FontSize = 16;
                 foreach (var view in plugin.getViewSwitchPages())
                 {
                     MenuItem childItem = new MenuItem();
@@ -669,6 +900,16 @@ namespace FrontFramework
 
     }
     #endregion
-    
+
+    class ViewState 
+    {
+        public double verticalPosition = 0;
+        public double horizontalPosition = 0;
+        public ViewState(double verticalPosition, double horizontalPosition)
+        {
+            this.verticalPosition = verticalPosition;
+            this.horizontalPosition = horizontalPosition;
+        }
+    }
 
 }

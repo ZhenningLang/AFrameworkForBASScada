@@ -4,12 +4,43 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="600"
-      Background="LightCyan" ShowsNavigationUI="False"
+      d:DesignHeight="1500" d:DesignWidth="3000"
+      ShowsNavigationUI="False"
 	Title="AnotherTestPluginPage">
 
-    <Grid>
-        <Slider HorizontalAlignment="Left" Margin="58,51,0,0" VerticalAlignment="Top" Width="177"/>
-
-    </Grid>
+    <StackPanel>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="100" Width="3000" HorizontalContentAlignment="Center" Foreground="#000000">
+            01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20
+        </Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="100" Width="3000" HorizontalContentAlignment="Center" Foreground="#0000ff">
+            01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20
+        </Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="100" Width="3000" HorizontalContentAlignment="Center" Foreground="#00ff00">
+            01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20
+        </Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="100" Width="3000" HorizontalContentAlignment="Center" Foreground="#ff0000">
+            01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20
+        </Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="100" Width="3000" HorizontalContentAlignment="Center" Foreground="#00ffff">
+            01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20
+        </Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="100" Width="3000" HorizontalContentAlignment="Center" Foreground="#000000">
+            01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20
+        </Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="100" Width="3000" HorizontalContentAlignment="Center" Foreground="#0ffff0">
+            01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20
+        </Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="100" Width="3000" HorizontalContentAlignment="Center" Foreground="#ffff00">
+            01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20
+        </Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="100" Width="3000" HorizontalContentAlignment="Center" Foreground="#000fff">
+            01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20
+        </Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="100" Width="3000" HorizontalContentAlignment="Center" Foreground="#00fff0">
+            01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20
+        </Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="100" Width="3000" HorizontalContentAlignment="Center" Foreground="#0fff00">
+            01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20
+        </Label>
+    </StackPanel>
 </Page>

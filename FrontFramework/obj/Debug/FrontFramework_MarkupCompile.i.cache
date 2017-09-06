@@ -11,10 +11,10 @@ false
 DEBUG;TRACE
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\App.xaml
 8-209187649
-21081537477
-37-1386885116
-36-1972957033
+11847953736
+29965294629
+39-1766526709
 Common\Views\AboutBox.xaml;Common\Views\Alert.xaml;Language\Views\Delete.xaml;Language\Views\DictionaryEditor.xaml;Language\Views\Add.xaml;Language\Views\Edit.xaml;LoginWindow.xaml;MainWindow.xaml;
-
-False
+resources\initial.png
+True
 

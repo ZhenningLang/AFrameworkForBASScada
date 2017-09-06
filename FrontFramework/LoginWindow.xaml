@@ -9,7 +9,7 @@
         ResizeMode="NoResize" 
         FontSize="16" 
         FontFamily="等线"
-        WindowStartupLocation ="CenterScreen" KeyUp="LoginKeyEvent">
+        WindowStartupLocation ="CenterScreen">
 
     <Grid Margin="15 20 15 3">
         <Grid.RowDefinitions>
@@ -40,8 +40,10 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Name="buttonLogin" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF337AB7" Foreground="White" Click="loginClick" Margin="2 10 10 3" Height="30">Button</Button>
-            <Button Grid.Column="1" Name="buttonCancel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Background="#FFD9534F" Click="cancelClick" Margin="10 10 2 3" Height="30">Button</Button>
+            <Button Grid.Column="0" Name="buttonLogin" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    Background="#FF337AB7" Foreground="White" Click="loginClick" Margin="2 10 10 3" Height="30" IsDefault="True">Button</Button>
+            <Button Grid.Column="1" Name="buttonCancel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    Foreground="White" Background="#FFD9534F" Click="cancelClick" Margin="10 10 2 3" Height="30" IsCancel="True">Button</Button>
         </Grid>
         <Grid Grid.Row="2">
             <Label Name="statusDisplay" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Right"

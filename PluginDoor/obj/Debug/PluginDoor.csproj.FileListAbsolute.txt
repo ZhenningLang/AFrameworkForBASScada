@@ -1,5 +1,5 @@
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\Plugins\PluginDoor.dll
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\Plugins\PluginDoor.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\plugins\PluginDoor.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\plugins\PluginDoor.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginDoor\obj\Debug\PluginDoor.csprojResolveAssemblyReference.cache
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginDoor\obj\Debug\DoorPage.baml
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginDoor\obj\Debug\DoorPage.g.cs

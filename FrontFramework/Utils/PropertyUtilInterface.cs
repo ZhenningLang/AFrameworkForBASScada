@@ -1,4 +1,5 @@
-﻿using FrontFramework.Common;
+﻿using Common;
+using FrontFramework.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace FrontFramework.Utils
 {
     interface PropertyUtilInterface
     {
-        OprResult loadProperty(Object obj);
-        OprResult getStrProp(String name);
-        OprResult setStrProp(String name, String value);
+        OptResult loadProperty(Object obj);
+        OptResult getStrProp(String name);
+        OptResult setStrProp(String name, String value);
         /// <summary>
         /// value - <propName, propVal>
         /// </summary>

@@ -1,0 +1,4 @@
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\Enumeration.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\Enumeration.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\obj\Debug\Enumeration.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\obj\Debug\Enumeration.pdb

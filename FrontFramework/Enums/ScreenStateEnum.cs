@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FrontFramework.Enums
 {
-    enum ScreenStateEnum
+    public enum ScreenStateEnum
     {
         NORMAL = 1,
         FULLSCREEN = 2,

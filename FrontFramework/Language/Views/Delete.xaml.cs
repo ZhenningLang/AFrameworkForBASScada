@@ -1,5 +1,4 @@
 ﻿using FrontFramework.Common.Views;
-using FrontFramework.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Translation;
+using Translation.XMLBasedLanguage;
 
 namespace FrontFramework.Language.Views
 {
@@ -48,7 +49,7 @@ namespace FrontFramework.Language.Views
             LanguageChangedNotifier.getInstance().removeListener(this);
         }
 
-        private Translator translator = TranslatorBasedOnXML.getTranslator();
+        private ITranslator translator = TranslatorBasedOnXML.getTranslator();
         public void initializeComponentContents()
         {
             translator.recoveryFromHistory();

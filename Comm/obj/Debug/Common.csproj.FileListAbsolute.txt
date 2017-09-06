@@ -1,0 +1,4 @@
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\Comm.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\Comm.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\obj\Debug\Comm.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\obj\Debug\Comm.pdb

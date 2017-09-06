@@ -22,9 +22,9 @@ namespace FrontFramework.Common.Views
         public Alert(String info, Window father)
         {
             InitializeComponent();
-            shower.Text = info;
-            this.Left = father.Left + father.Width / 2 - this.Width / 2;
-            this.Top = father.Top + father.Height / 2 - this.Height / 2;
+            shower.Content = info + "\n";
+            this.Left = father.Left + father.ActualWidth / 2 - this.ActualWidth / 2;
+            this.Top = father.Top + father.ActualHeight / 2 - this.ActualHeight / 2;
         }
     }
 }

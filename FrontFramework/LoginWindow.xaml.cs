@@ -14,7 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FrontFramework.Interfaces;
+using Enumeration;
+using Translation;
+using Translation.XMLBasedLanguage;
 
 namespace FrontFramework
 {
@@ -23,7 +25,7 @@ namespace FrontFramework
     /// </summary>
     public partial class LoginWindow : Window, ComponentDynamicTranslate
     {
-        private static Translator translator = TranslatorBasedOnXML.getTranslator();
+        private static ITranslator translator = TranslatorBasedOnXML.getTranslator();
         public LoginWindow()
         {
             InitializeComponent();
@@ -98,18 +100,6 @@ namespace FrontFramework
                     translator.setLanguage(LanguageEnum.ENGLISH, LanguageEnum.CHINESE);
                 }
                 LanguageChangedNotifier.getInstance().notifyAll();
-            }
-        }
-
-        private void LoginKeyEvent(object sender, KeyEventArgs e)
-        {
-            if (e.Key.ToString().Equals("Return"))
-            {
-                loginClick(null, null);
-            }
-            else if (e.Key.ToString().Equals("Escape"))
-            {
-                cancelClick(null, null);
             }
         }
     }

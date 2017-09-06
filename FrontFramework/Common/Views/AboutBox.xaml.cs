@@ -1,5 +1,4 @@
-﻿using FrontFramework.Interfaces;
-using FrontFramework.Language;
+﻿using FrontFramework.Language;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Translation;
 
 namespace FrontFramework.Common.Views
 {
@@ -37,7 +37,7 @@ namespace FrontFramework.Common.Views
 
         public void initializeComponentContents()
         {
-            Translator translator = TranslatorFactory.getTranslator();
+            ITranslator translator = TranslatorFactory.getTranslator();
             this.Title = translator.getComponentTranslation("About");
             okButton.Content = translator.getComponentTranslation("Ok");
         }

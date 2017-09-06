@@ -60,6 +60,8 @@ namespace FrontFramework {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         public static void Main() {
+            SplashScreen splashScreen = new SplashScreen("resources/initial.png");
+            splashScreen.Show(true);
             FrontFramework.App app = new FrontFramework.App();
             app.InitializeComponent();
             app.Run();

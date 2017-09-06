@@ -1,5 +1,5 @@
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\Plugins\PluginFAS.dll
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\Plugins\PluginFAS.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\plugins\PluginFAS.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\plugins\PluginFAS.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\obj\Debug\PluginFAS.csprojResolveAssemblyReference.cache
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\obj\Debug\AlarmPage.baml
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\obj\Debug\TempPage.baml

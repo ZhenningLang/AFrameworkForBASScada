@@ -113,23 +113,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Common\OprResult.cs" />
     <Compile Include="Common\Views\AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Views\Alert.xaml.cs">
       <DependentUpon>Alert.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\LanguageEnum.cs" />
+    <Compile Include="Enums\PageModeEnum.cs" />
     <Compile Include="Enums\ScreenStateEnum.cs" />
     <Compile Include="Enums\VolumnEnum.cs" />
     <Compile Include="Help\DocHelper.cs" />
     <Compile Include="Help\IHelper.cs" />
     <Compile Include="Help\OnlineHelper.cs" />
-    <Compile Include="Language\ComponentDynamicTranslate.cs" />
-    <Compile Include="Language\LanguageChangedNotifier.cs" />
-    <Compile Include="Language\Translator.cs" />
-    <Compile Include="Language\TranslatorFactory.cs" />
     <Compile Include="Language\Views\Add.xaml.cs">
       <DependentUpon>Add.xaml</DependentUpon>
     </Compile>
@@ -139,8 +134,6 @@
     <Compile Include="Language\Views\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Language\XMLBasedLanguage\TranslatorBasedOnXML.cs" />
-    <Compile Include="Language\XMLBasedLanguage\XmlProcessor.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -149,7 +142,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Station\StationInfoManager.cs" />
-    <Compile Include="Tests\LanguageTester.cs" />
     <Compile Include="Utils\Print\PrintHelper.cs" />
     <Compile Include="Utils\PropUtilFactory.cs" />
     <Compile Include="Utils\Spring\SpringUtil.cs" />
@@ -178,6 +170,9 @@
     <Resource Include="resources\images\multiScreen.png" />
     <Resource Include="resources\images\addWindow.png" />
     <Resource Include="resources\images\binding.png" />
+    <Resource Include="resources\images\unbinding.png" />
+    <Resource Include="resources\images\disbinding.png" />
+    <SplashScreen Include="resources\Initial.png" />
     <Content Include="resources\sounds\alarm.wav" />
     <Resource Include="resources\configs\config.xml" />
     <Page Include="Common\Views\AboutBox.xaml">
@@ -215,10 +210,6 @@
     <Compile Include="Language\Views\DictionaryEditor.xaml.cs">
       <DependentUpon>DictionaryEditor.xaml</DependentUpon>
     </Compile>
-    <Content Include="Language\XMLBasedLanguage\lang.xml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Content>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -260,9 +251,21 @@
     <Folder Include="bin\Debug\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Comm\Common.csproj">
+      <Project>{b1fab640-5426-4266-867b-dfcb6ff71ec5}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Enumeration\Enumeration.csproj">
+      <Project>{06094f56-cf1f-490d-beac-7ed947d75f69}</Project>
+      <Name>Enumeration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PluginDefinition\PluginDefinition.csproj">
       <Project>{bff1fca5-c961-471b-ab12-50e8e3248dcd}</Project>
       <Name>PluginDefinition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Translation\Translation.csproj">
+      <Project>{ebd239d1-8d44-44e4-bf51-9bb7f19b5656}</Project>
+      <Name>Translation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

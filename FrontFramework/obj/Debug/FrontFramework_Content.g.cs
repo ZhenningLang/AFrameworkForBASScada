@@ -9,6 +9,5 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/sounds/alarm.wav")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("language/xmlbasedlanguage/lang.xml")]
 
 

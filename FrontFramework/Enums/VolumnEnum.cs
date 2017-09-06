@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FrontFramework.Enums
 {
-    enum VolumnEnum
+    public enum VolumnEnum
     {
         MIN_VOL = 0,
         MAX_VOL = 1

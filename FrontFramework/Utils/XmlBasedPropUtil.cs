@@ -1,4 +1,4 @@
-﻿using FrontFramework.Common;
+﻿using Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +21,9 @@ namespace FrontFramework.Utils
         private static String fileName;
         private static XmlDocument xmlDoc;
         private static Dictionary<String, String> props = new Dictionary<string, string>();
-        public OprResult loadProperty(Object obj) 
+        public OptResult loadProperty(Object obj) 
         {
-            OprResult result = new OprResult(true);
+            OptResult result = new OptResult(true);
             try
             {
                 fileName = (String)obj;
@@ -45,9 +45,9 @@ namespace FrontFramework.Utils
             }
             return result;
         }
-        public OprResult getStrProp(String name)
+        public OptResult getStrProp(String name)
         {
-            OprResult result = new OprResult(true);
+            OptResult result = new OptResult(true);
             if (props.ContainsKey(name))
             {
                 result.info = props[name];
@@ -58,9 +58,9 @@ namespace FrontFramework.Utils
             }
             return result;
         }
-        public OprResult setStrProp(String name, String value) 
+        public OptResult setStrProp(String name, String value) 
         {
-            OprResult result = new OprResult(true);
+            OptResult result = new OptResult(true);
             try
             {
                 XmlElement node = (XmlElement)xmlDoc.SelectSingleNode("//property[@id='" + name + "']");

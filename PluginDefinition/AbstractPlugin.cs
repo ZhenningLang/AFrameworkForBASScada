@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Communication.FCMP;
+using Communication.Redis;
 
 namespace PluginDefinition
 {
@@ -14,6 +16,8 @@ namespace PluginDefinition
     {
         protected int stationCode;
         protected ConcurrentQueue<BasEvent> basEventQueue = new ConcurrentQueue<BasEvent>();
+        protected Communication.IComm fcmpComm = FCMPCommunication.getFCMPCommInstance();
+        protected Communication.IComm redisComm = RedisCommunication.getRedisCommInstance();
 
         public AbstractPlugin()
         {
@@ -119,6 +123,9 @@ namespace PluginDefinition
         public BasAlarmSolvedHandler sendSolvedAlarm;
 
         #endregion
+        #region 报警消息处理相关
+        public void setLanguage() { }
+        #endregion
     }
 
     public class BasAlarm
@@ -135,15 +142,23 @@ namespace PluginDefinition
     public class BasEvent
     {
         public String eventSource { get; set; }
+        public Boolean isBroadcast { get; set; }
         public List<String> eventDestination { get; set; }
         public String eventName { get; set; }
         public List<Object> eventParas { get; set; }
         override public String ToString() 
         {
             String str = "from: " + eventSource;
-            foreach (var toName in eventDestination) 
+            if (isBroadcast)
             {
-                str += "\n to: " + toName.ToString();
+                str += "\n Broadcast ";
+            }
+            else
+            {
+                foreach (var toName in eventDestination)
+                {
+                    str += "\n to: " + toName.ToString();
+                }
             }
             return str + "\n event name: " + eventName + "\n";
         }
