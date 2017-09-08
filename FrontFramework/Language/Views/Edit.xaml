@@ -1,8 +1,9 @@
-﻿<Window x:Class="FrontFramework.Language.Views.Edit"
+﻿<Controls:MetroWindow x:Class="FrontFramework.Language.Views.Edit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
-        Height="181" Width="308" Icon="../../resources/icon.ico"  ResizeMode="NoResize"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Height="181" Width="308" Icon="../../resources/icon.png"  ResizeMode="NoResize"
         FontSize="16" 
         FontFamily="等线"
         KeyUp="Window_KeyUp">
@@ -10,8 +11,8 @@
         <Label Name="labelChinese" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="76" Height="30"/>
         <Label Name="labelEnglish" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="76" Height="30"/>
 
-        <Button Name="buttonOK" HorizontalAlignment="Left" Margin="53,97,0,0" VerticalAlignment="Top" Width="74"  Background="#FF337AB7" Foreground="White" Height="26" Click="okClick" RenderTransformOrigin="0.243,0.5"/>
-        <Button Name="buttonCancel" HorizontalAlignment="Left" Margin="164,97,0,0" VerticalAlignment="Top"  Width="74" Foreground="White" Background="#FFD9534F" Height="26" Click="cancelClick"/>
+        <Button Name="buttonOK" HorizontalAlignment="Left" Margin="53,97,0,0" VerticalAlignment="Top" Width="74" FontSize="16" FontFamily="等线" Background="#FF337AB7" Foreground="White" Height="26" Click="okClick" RenderTransformOrigin="0.243,0.5"/>
+        <Button Name="buttonCancel" HorizontalAlignment="Left" Margin="164,97,0,0" VerticalAlignment="Top"  Width="74" FontSize="16" FontFamily="等线" Foreground="White" Background="#FFD9534F" Height="26" Click="cancelClick"/>
 
         <TextBox Name="chInput" Width="192" Height="30" Margin="86,10,0,0" TextWrapping="Wrap" 
                  HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
@@ -20,4 +21,4 @@
                  input:InputMethod.IsInputMethodEnabled="False"/>
         
     </Grid>
-</Window>
+</Controls:MetroWindow>

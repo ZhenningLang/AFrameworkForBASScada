@@ -27,7 +27,7 @@ namespace FrontFramework.Language.Views
     /// <summary>
     /// DictionaryEditor.xaml 的交互逻辑
     /// </summary>
-    public partial class DictionaryEditor : Window, ComponentDynamicTranslate
+    public partial class DictionaryEditor : ComponentDynamicTranslate
     {
         private List<TransDataModel> gridData = null;
         private ITranslator translator = TranslatorBasedOnXML.getTranslator();

@@ -2,3 +2,12 @@ C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communicatio
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\Communication.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\obj\Debug\Communication.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\obj\Debug\Communication.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\ControlzEx.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\MahApps.Metro.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\ControlzEx.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\MahApps.Metro.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\MahApps.Metro.xml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\MahApps.Metro.IconPacks.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\MahApps.Metro.IconPacks.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\MahApps.Metro.IconPacks.xml

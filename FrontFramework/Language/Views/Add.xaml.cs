@@ -19,7 +19,7 @@ namespace FrontFramework.Language.Views
     /// <summary>
     /// Window1.xaml 的交互逻辑
     /// </summary>
-    public partial class Add : Window, ComponentDynamicTranslate
+    public partial class Add : ComponentDynamicTranslate
     {
         DictionaryEditor father = null;
         public Add(DictionaryEditor father)

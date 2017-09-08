@@ -23,7 +23,7 @@ namespace FrontFramework
     /// <summary>
     /// LoginWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class LoginWindow : Window, ComponentDynamicTranslate
+    public partial class LoginWindow : ComponentDynamicTranslate
     {
         private static ITranslator translator = TranslatorBasedOnXML.getTranslator();
         public LoginWindow()
@@ -41,7 +41,6 @@ namespace FrontFramework
 
         public void initializeComponentContents() 
         {
-            this.Title = translator.getComponentTranslation("Login");
             labelUserName.Content = translator.getComponentTranslation("UserName");
             labelPassword.Content = translator.getComponentTranslation("Password");
             labelLanguage.Content = translator.getComponentTranslation("Language");
@@ -55,7 +54,7 @@ namespace FrontFramework
             languageComboBox.SelectedValuePath = "lang";
             languageComboBox.DisplayMemberPath = "show";
             languageComboBox.SelectedValue = translator.getLanguageTo();
-            statusDisplay.Content = "";
+            statusDisplay.Content = null;
         }
 
         private void loginClick(object sender, RoutedEventArgs e)
@@ -100,6 +99,27 @@ namespace FrontFramework
                     translator.setLanguage(LanguageEnum.ENGLISH, LanguageEnum.CHINESE);
                 }
                 LanguageChangedNotifier.getInstance().notifyAll();
+            }
+        }
+
+        private void MetroWindow_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource.GetType().ToString().Equals("MahApps.Metro.Controls.MultiFrameImage"))
+            {
+                e.Handled = true;
+            }
+            // move the window
+            if (e.LeftButton == MouseButtonState.Pressed && 
+                e.OriginalSource.GetType().ToString().Equals("MahApps.Metro.Controls.MultiFrameImage"))
+            {
+                DragMove();
+            }
+        }
+        private void MetroWindow_TitleTextBlockClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource.GetType().ToString().Equals("System.Windows.Controls.TextBlock"))
+            {
+                e.Handled = true;
             }
         }
     }

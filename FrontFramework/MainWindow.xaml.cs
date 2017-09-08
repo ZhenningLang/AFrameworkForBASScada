@@ -6,6 +6,7 @@ using FrontFramework.Station;
 using FrontFramework.Utils;
 using FrontFramework.Utils.Print;
 using FrontFramework.Utils.Spring;
+using MahApps.Metro.Controls;
 using PluginDefinition;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace FrontFramework
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow: Window, ComponentDynamicTranslate
+    public partial class MainWindow : ComponentDynamicTranslate
     {
         // 单例变量
         private static PropertyUtilInterface propUtil = null;
@@ -79,6 +80,7 @@ namespace FrontFramework
         public void initializeComponentContents() 
         {
             this.Title = translator.getComponentTranslation("MAIN_WINDOW_NAME");
+            menuNameLable.Content = translator.getComponentTranslation("Menu");
             menuSystem.Header = translator.getComponentTranslation("System");
             menuUser.Header = translator.getComponentTranslation("User");
             menuLogout.Header = translator.getComponentTranslation("Logout");
@@ -198,8 +200,8 @@ namespace FrontFramework
                     // 操作 View 区域
                     if (to == ScreenStateEnum.NORMAL)
                     {
-                        MenuArea.Width = double.NaN;
-                        MenuArea.Height = double.NaN;
+                        //MenuArea.Width = double.NaN;
+                        //MenuArea.Height = double.NaN;
                         ViewSwitchArea.Width = double.NaN;
                         ViewSwitchArea.Height = double.NaN;
                         MainView.Width = double.NaN;
@@ -209,8 +211,8 @@ namespace FrontFramework
                     }
                     else if (to == ScreenStateEnum.FULLSCREEN)
                     {
-                        MenuArea.Width = 0;
-                        MenuArea.Height = 0;
+                        //MenuArea.Width = 0;
+                       // MenuArea.Height = 0;
                         ViewSwitchArea.Width = double.NaN;
                         ViewSwitchArea.Height = double.NaN;
                         MainView.Width = double.NaN;
@@ -220,8 +222,8 @@ namespace FrontFramework
                     }
                     else if (to == ScreenStateEnum.FLOAT)
                     {
-                        MenuArea.Width = double.NaN;
-                        MenuArea.Height = double.NaN;
+                        //MenuArea.Width = double.NaN;
+                        //MenuArea.Height = double.NaN;
                         ViewSwitchArea.Width = 0;
                         ViewSwitchArea.Height = 0;
                         MainView.Width = 0;
@@ -581,7 +583,7 @@ namespace FrontFramework
     }
 
     #region 报警声音操作
-    public partial class MainWindow : Window, ComponentDynamicTranslate
+    public partial class MainWindow : ComponentDynamicTranslate
     {
         public void AlarmModuleInit()
         {
@@ -644,7 +646,7 @@ namespace FrontFramework
     #endregion
 
     #region 系统菜单
-    public partial class MainWindow : Window, ComponentDynamicTranslate
+    public partial class MainWindow : ComponentDynamicTranslate
     {
         public void SysMenuInit() 
         {
@@ -697,7 +699,7 @@ namespace FrontFramework
     #endregion
 
     #region 帮助菜单
-    public partial class MainWindow : Window, ComponentDynamicTranslate
+    public partial class MainWindow : ComponentDynamicTranslate
     {
         private void docHelpOnClick(object sender, RoutedEventArgs e)
         {
@@ -717,7 +719,7 @@ namespace FrontFramework
     #endregion
 
     #region 车站菜单
-    public partial class MainWindow : Window, ComponentDynamicTranslate
+    public partial class MainWindow : ComponentDynamicTranslate
     {
         private int stationCode;
         public int getStationCode() { return this.stationCode; }
@@ -788,7 +790,7 @@ namespace FrontFramework
     #endregion
 
     #region 插件交互
-    public partial class MainWindow : Window, ComponentDynamicTranslate 
+    public partial class MainWindow : ComponentDynamicTranslate 
     {
 
         // 变量定义
@@ -818,29 +820,24 @@ namespace FrontFramework
         /// <summary>
         /// 主要负责初始化插件在界面中的显示与一些点击回调函数
         /// </summary>
+        private Brush tabHeaderForegroundBrushTemp;
+        private Label selectedLabel = null;
         private void PluginInit()
         {
             int i = 0;
             // 清空原有显示
-            for (; i < MainMenu.Items.Count; i++)
+            for (; i < mainMenu.Items.Count; i++)
             {
-                if (((MenuItem)MainMenu.Items.GetItemAt(i)).Name.Equals("beginSeparator"))
+                if (((MenuItem)mainMenu.Items.GetItemAt(i)).Name.Equals("fakeSeparator"))
                 {
                     i++;
                     break;
                 }
             }
-            for (; i < MainMenu.Items.Count; i++)
+            for (; i < mainMenu.Items.Count; i++)
             {
-                if (!((MenuItem)MainMenu.Items.GetItemAt(i)).Name.Equals("endSeparator"))
-                {
-                    MainMenu.Items.Remove(MainMenu.Items.GetItemAt(i));
-                    i--;
-                }
-                else
-                {
-                    break;
-                }
+                mainMenu.Items.Remove(mainMenu.Items.GetItemAt(i));
+                i--;
             }
             ViewSwitchTabControl.Items.Clear();
             // 添加新显示
@@ -858,13 +855,36 @@ namespace FrontFramework
                         childItem.Header = translator.getComponentTranslation(str.Split(' '));
                         item.Items.Add(childItem);
                     }
-                    MainMenu.Items.Insert(MainMenu.Items.Count - 2, item);
+                    item.Foreground = new SolidColorBrush(Colors.Black);
+                    item.HorizontalAlignment = HorizontalAlignment.Left;
+                    mainMenu.Items.Insert(mainMenu.Items.Count, item);
                 }
                 // view switch menu
                 TabItem tabItem = new TabItem();
-                tabItem.Header = translator.getComponentTranslation(plugin.getViewSwitchMenuId().Split(' '));
+                Label tabHeaderLable = new Label();
+                tabHeaderLable.Content = translator.getComponentTranslation(plugin.getViewSwitchMenuId().Split(' '));
+                tabHeaderLable.FontSize = 16;
+                tabHeaderLable.FontFamily = new FontFamily("等线");
+                tabItem.Header = tabHeaderLable;
+                tabHeaderLable.MouseEnter += (obj, eventArgs) =>
+                {
+                    tabHeaderForegroundBrushTemp = ((Label)eventArgs.Source).Foreground;
+                    ((Label)eventArgs.Source).Foreground = new SolidColorBrush(Colors.LightBlue);
+                };
+                tabHeaderLable.MouseLeave += (obj, eventArgs) =>
+                {
+                    ((Label)eventArgs.Source).Foreground = tabHeaderForegroundBrushTemp;
+                };
+                tabHeaderLable.MouseLeftButtonDown += (obj, eventArgs) =>
+                {
+                    if (selectedLabel != null)
+                        selectedLabel.Foreground = new SolidColorBrush(Colors.Black);
+                    selectedLabel = (Label)eventArgs.Source;
+                    ((Label)eventArgs.Source).Foreground = new SolidColorBrush(Colors.LightBlue);
+                    tabHeaderForegroundBrushTemp = new SolidColorBrush(Colors.LightBlue);
+                };
                 Menu switchMenu = new Menu();
-                switchMenu.FontSize = 16;
+                switchMenu.FontSize = 3;
                 foreach (var view in plugin.getViewSwitchPages())
                 {
                     MenuItem childItem = new MenuItem();

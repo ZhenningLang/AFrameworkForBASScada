@@ -91,3 +91,13 @@ C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramewo
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\FrontFramework.csproj.GenerateResource.Cache
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\FrontFramework.exe
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\FrontFramework.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\ControlzEx.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\MahApps.Metro.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\ControlzEx.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\MahApps.Metro.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\MahApps.Metro.xml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\App.baml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\MahApps.Metro.IconPacks.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\MahApps.Metro.IconPacks.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\MahApps.Metro.IconPacks.xml

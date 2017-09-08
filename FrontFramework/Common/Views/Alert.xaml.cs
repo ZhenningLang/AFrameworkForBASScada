@@ -17,7 +17,7 @@ namespace FrontFramework.Common.Views
     /// <summary>
     /// Alert.xaml 的交互逻辑
     /// </summary>
-    public partial class Alert : Window
+    public partial class Alert
     {
         public Alert(String info, Window father)
         {

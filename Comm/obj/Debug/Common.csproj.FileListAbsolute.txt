@@ -2,3 +2,13 @@ C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Deb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\Comm.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\obj\Debug\Comm.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\obj\Debug\Comm.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\ControlzEx.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\MahApps.Metro.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\ControlzEx.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\MahApps.Metro.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\MahApps.Metro.xml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\MahApps.Metro.IconPacks.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\MahApps.Metro.IconPacks.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\bin\Debug\MahApps.Metro.IconPacks.xml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Comm\obj\Debug\Common.csprojResolveAssemblyReference.cache

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ControlzEx</id>
+    <version>3.0.1.66</version>
+    <title>ControlzEx</title>
+    <authors>Jan Karger, Bastian Schmidt, James Willock</authors>
+    <owners>Jan Karger, Bastian Schmidt, James Willock</owners>
+    <licenseUrl>https://raw.githubusercontent.com/ControlzEx/ControlzEx/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ControlzEx/ControlzEx</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/ControlzEx/ControlzEx/develop/logo-mini.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ControlzEx</description>
+    <summary>ControlzEx</summary>
+    <releaseNotes>https://github.com/ControlzEx/ControlzEx/releases</releaseNotes>
+    <copyright>Copyright 2015 - 2017 Jan Karger, Bastian Schmidt, James Willock</copyright>
+    <tags>WPF XAML Controls WinRT UI UX Windows WindowChrome</tags>
+  </metadata>
+</package>

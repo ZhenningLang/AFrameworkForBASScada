@@ -17,7 +17,7 @@ using Translation.XMLBasedLanguage;
 
 namespace FrontFramework.Language.Views
 {
-    public partial class Delete : Window, ComponentDynamicTranslate
+    public partial class Delete : ComponentDynamicTranslate
     {
         DictionaryEditor father = null;
         private String id = null;
