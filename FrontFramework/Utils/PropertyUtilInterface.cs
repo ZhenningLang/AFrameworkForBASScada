@@ -11,6 +11,7 @@ namespace FrontFramework.Utils
     interface PropertyUtilInterface
     {
         OptResult loadProperty(Object obj);
+        OptResult reloadProperty();
         OptResult getStrProp(String name);
         OptResult setStrProp(String name, String value);
         /// <summary>

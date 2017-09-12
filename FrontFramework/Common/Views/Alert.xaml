@@ -1,14 +1,13 @@
 ﻿<Controls:MetroWindow x:Class="FrontFramework.Common.Views.Alert"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Alert" Icon="../../resources/icon.png"  ResizeMode="NoResize" SizeToContent="WidthAndHeight" MaxWidth="300"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Alert" Icon="../../resources/icon.png"  ResizeMode="NoResize" SizeToContent="WidthAndHeight"
         FontSize="16" 
         FontFamily="等线">
     <Grid>
-        <Label Name="shower" Width="auto" Height="auto" Margin="25"
-               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
+        <Label Name="shower" Width="auto" Height="auto" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+               HorizontalAlignment="Center" VerticalAlignment="Center"
                FontWeight="Bold" />
     </Grid>
 </Controls:MetroWindow>

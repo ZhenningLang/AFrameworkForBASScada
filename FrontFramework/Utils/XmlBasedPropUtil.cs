@@ -45,6 +45,30 @@ namespace FrontFramework.Utils
             }
             return result;
         }
+        public OptResult reloadProperty()
+        {
+            OptResult result = new OptResult(true);
+            props.Clear();
+            try
+            {
+                xmlDoc = new XmlDocument();
+                xmlDoc.Load(fileName);
+                XmlNodeList nodeList = xmlDoc.SelectNodes("//property");
+                foreach (XmlElement node in nodeList)
+                {
+                    if (node.GetAttribute("type") == null || !node.GetAttribute("type").Equals("list"))
+                    {
+                        props.Add(node.GetAttribute("id"), node.InnerText.Trim());
+                    }
+                }
+            }
+            catch (Exception er)
+            {
+                result.result = false;
+                result.info = er.ToString();
+            }
+            return result;
+        }
         public OptResult getStrProp(String name)
         {
             OptResult result = new OptResult(true);

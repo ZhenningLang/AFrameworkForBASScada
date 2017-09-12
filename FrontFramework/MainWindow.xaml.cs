@@ -88,8 +88,8 @@ namespace FrontFramework
             menuChinese.Header = translator.getComponentTranslation("Chinese");
             menuEnglish.Header = translator.getComponentTranslation("English");
             menuTools.Header = translator.getComponentTranslation("Tools");
-            menuPrint.Header = translator.getComponentTranslation("Print");
-            menuPrintScr.Header = translator.getComponentTranslation("PrintScr");
+            //menuPrint.Header = translator.getComponentTranslation("Print");
+            menuSnapshot.Header = translator.getComponentTranslation("PrintScr") + " (Ctrl+Shift+C)";
             menuDicManager.Header = translator.getComponentTranslation(new String[] { "Dictionary", "Manage" });
             menuAlarmTest.Header = translator.getComponentTranslation(new String[] { "Alarm", "Test" });
             menuStartAlarm.Header = translator.getComponentTranslation(new String[] { "Start", "Alarm" });
@@ -98,8 +98,9 @@ namespace FrontFramework
             menuPluginManager.Header = translator.getComponentTranslation(new String[]{"Plugin","Manage"});
             menuView.Header = translator.getComponentTranslation("View");
             normalScreenMenu.Header = translator.getComponentTranslation(new String[]{"Normal","View"});
-            fullScreenMenu.Header = translator.getComponentTranslation("Full Screen");
-            fullScreenMenu.ToolTip = "Esc " + translator.getComponentTranslation("Exit");
+            //fullScreenMenu.Header = translator.getComponentTranslation("Full Screen");
+            //fullScreenMenu.ToolTip = "Esc " + translator.getComponentTranslation("Exit");
+            viewSettingMenu.Header = translator.getComponentTranslation(new String[] { "View", "Setting" });
             floatScreenMenu.Header = translator.getComponentTranslation("Float Screen");
             multiPageMenu.Header = translator.getComponentTranslation("MultiPage");
             singlePageMenu.Header = translator.getComponentTranslation(new String[]{"Single","Page"});
@@ -122,14 +123,15 @@ namespace FrontFramework
             multiMode = PropUtilFactory.getPropUtil().getStrProp("multiMode").info;
             if (multiMode.Equals("multipage"))
             {
-                multiScreenMenu.Foreground = new SolidColorBrush(Colors.Gray);
-                multiScreenMenu.Items.Clear();
+                setMultiPageMode();
             }
             else
             {
-                multiPageMenu.Foreground = new SolidColorBrush(Colors.Gray);
-                multiPageMenu.Items.Clear();
+                setMultiMonitorMode();
             }
+            string[] offsets = propUtil.getStrProp("primaryMonitorOffset").info.Split(new char[] { ',' });
+            leftOffset = int.Parse(offsets[0]);
+            topOffset = int.Parse(offsets[1]);
             PluginInit();
             StationMenuInit();
         }
@@ -174,7 +176,22 @@ namespace FrontFramework
             # region 插件菜单
             #endregion
 
-            # region 视图菜单
+                # region 视图菜单
+                public void setMultiPageMode()
+                {
+                    normalScreenMenu.IsEnabled = true;
+                    floatScreenMenu.IsEnabled = true;
+                    multiPageMenu.IsEnabled = true;
+                    multiMonitorMenu.IsEnabled = false;
+                }
+                public void setMultiMonitorMode()
+                {
+                    normalScreenMenu.IsEnabled = false;
+                    floatScreenMenu.IsEnabled = false;
+                    multiPageMenu.IsEnabled = false;
+                    multiMonitorMenu.IsEnabled = true;
+                }
+
                 private void normalScreenOnClick(object sender, RoutedEventArgs e)
                 {
                     setWindowState(screenState, ScreenStateEnum.NORMAL);
@@ -265,8 +282,8 @@ namespace FrontFramework
                     // 数据存储
                     if (from == ScreenStateEnum.NORMAL)
                     {
-                        widthBeforeFullScreen = this.Width;
-                        heightBeforeFullScreen = this.Height;
+                        widthBeforeFullScreen = this.ActualWidth;
+                        heightBeforeFullScreen = this.ActualHeight;
                         leftBeforeFullScreen = this.Left;
                         topBeforeFullScreen = this.Top;
                     }
@@ -289,26 +306,26 @@ namespace FrontFramework
                     // Max size
                     if (to == ScreenStateEnum.FLOAT)
                     {
-                        fullScreenMenu.IsEnabled = false;
+                        //fullScreenMenu.IsEnabled = false;
                         this.MaxHeight = this.Height;
                         this.MinHeight = this.Height;
                     }
                     else
                     {
-                        fullScreenMenu.IsEnabled = true;
+                        //fullScreenMenu.IsEnabled = true;
                         this.MaxHeight = 5000.0;
                     }
                     // menu enabled
                     if (to == ScreenStateEnum.NORMAL)
                     {
                         normalScreenMenu.IsEnabled = false;
-                        fullScreenMenu.IsEnabled = true;
+                        //fullScreenMenu.IsEnabled = true;
                         floatScreenMenu.IsEnabled = true;
                     }
                     else if (to == ScreenStateEnum.FLOAT)
                     {
                         normalScreenMenu.IsEnabled = true;
-                        fullScreenMenu.IsEnabled = false;
+                        //fullScreenMenu.IsEnabled = false;
                         floatScreenMenu.IsEnabled = false;
                     }
                     // 状态改变
@@ -326,12 +343,19 @@ namespace FrontFramework
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
+        // 截屏一按一起才是一次完整动作
         private void mainScreenKeyUp(object sender, KeyEventArgs e)
         {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.LeftShift) && e.Key == Key.C) 
+            {
+                snapshotOnClick(null, null);
+                e.Handled = true;
+            }
+            /*
             if (e.Key == Key.Escape && screenState == ScreenStateEnum.FULLSCREEN)
             {
                 setWindowState(screenState, ScreenStateEnum.NORMAL);
-            }
+            }*/
         }
 
         private void WindowClosed(object sender, EventArgs e)
@@ -344,29 +368,7 @@ namespace FrontFramework
         }
 
         /////////////////////////////////// 多视图功能 //////////////////////////////////////
-        private static String multiMode; // multipage or multiscreen
-        private void multiPageMenuOnClick(object sender, RoutedEventArgs e)
-        {
-            if (multiMode.Equals("multiscreen") && ((MenuItem)e.Source).Name.Equals("multiPageMenu"))
-            {
-                multiMode = "multipage";
-                propUtil.setStrProp("multiMode", "multipage");
-                this.Visibility = Visibility.Hidden;
-                new MainWindow().Show();
-                this.Close();
-            }
-        }
-        private void multiScreenMenuOnClick(object sender, RoutedEventArgs e)
-        {
-            if (multiMode.Equals("multipage") && ((MenuItem)e.Source).Name.Equals("multiScreenMenu"))
-            {
-                multiMode = "multiscreen";
-                propUtil.setStrProp("multiMode", "multiscreen");
-                this.Visibility = Visibility.Hidden;
-                new MainWindow().Show();
-                this.Close();
-            }
-        }
+        private static String multiMode; // multipage or multimonitor
         private void viewSwitchMenuClicked(object sender, EventArgs e)
         {
             if (selectedPageIndex == 0)
@@ -580,6 +582,99 @@ namespace FrontFramework
 
         }
 
+        private void snapshotOnClick(object sender, RoutedEventArgs e)
+        {
+            PrintScreen();
+            Thread.Sleep(10);
+            if (System.Windows.Forms.Clipboard.ContainsImage())
+            {
+                System.Drawing.Image clipImage = System.Windows.Forms.Clipboard.GetImage();
+                System.Drawing.Bitmap image = cutPicture(clipImage, this);
+                // save
+                using (System.Drawing.Graphics oGraphics = System.Drawing.Graphics.FromImage(image))
+                {
+                    oGraphics.Flush();
+                }
+                String fileName = "./snapshots/snapshot" + DateTime.Now.ToString("yyyyMMdd HHmmss fff") + ".bmp";
+                image.Save(fileName, System.Drawing.Imaging.ImageFormat.Bmp);
+
+                /* Window testWindow = new Window();
+                Image testImage = new Image();
+                System.Windows.Media.Imaging.BitmapSource bi = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                    image.GetHbitmap(),
+                    IntPtr.Zero,
+                    Int32Rect.Empty,
+                    BitmapSizeOptions.FromEmptyOptions()
+                );
+                testImage.Source = bi;
+                testWindow.Content = testImage;
+                testWindow.Show();
+                //return image; */
+            }
+        }
+
+        private static int topOffset = 0, leftOffset = 0;
+        public static void setOffset(int leftOffset, int topOffset)
+        {
+            MainWindow.leftOffset = leftOffset;
+            MainWindow.topOffset = topOffset;
+            propUtil.setStrProp("primaryMonitorOffset", leftOffset + ", " + topOffset);
+            propUtil.reloadProperty();
+        }
+
+        private System.Drawing.Bitmap cutPicture(System.Drawing.Image image, MetroWindow window)
+        {
+            if (image != null)
+            {
+                int windowWidth = (int)window.ActualWidth;
+                int windowHeight = (int)window.ActualHeight;
+                //windowWidth = (window.Left + windowWidth) > image.Width ? (image.Width - (int)window.Left) : windowWidth;
+                //windowHeight = (window.Top + windowHeight) > image.Height ? (image.Height - (int)window.Top) : windowHeight;
+                //新建一个bmp图片
+                System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(windowWidth, windowHeight);
+                //新建一个画板
+                System.Drawing.Graphics graphic = System.Drawing.Graphics.FromImage(bitmap);
+                //设置高质量插值法
+                graphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+                //设置高质量，低速度呈现平滑程度
+                graphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                //清空画布并以透明背景色填充
+                graphic.Clear(System.Drawing.Color.Transparent);
+                //在指定位置并且按指定大小绘制原图片的指定部分
+                graphic.DrawImage(
+                    image,
+                    new System.Drawing.Rectangle(0, 0, windowWidth, windowHeight),
+                    new System.Drawing.Rectangle(MainWindow.leftOffset + (int)window.Left, MainWindow.topOffset + (int)window.Top, windowWidth, windowHeight),
+                    System.Drawing.GraphicsUnit.Pixel);
+                return bitmap;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        const int VK_SNAPSHOT = 0x2C;
+        private void PrintScreen()
+        {
+            keybd_event((byte)VK_SNAPSHOT, 0, 0x0, IntPtr.Zero);//down  
+            System.Windows.Forms.Application.DoEvents();//强制窗口响应按钮事件
+            keybd_event((byte)VK_SNAPSHOT, 0, 0x2, IntPtr.Zero);//up  
+            System.Windows.Forms.Application.DoEvents();
+        }
+        [DllImport("user32.dll")]
+        static extern void keybd_event
+        (
+            byte bVk,// 虚拟键值
+            byte bScan,// 硬件扫描码    
+            uint dwFlags,// 动作标识    
+            IntPtr dwExtraInfo// 与键盘动作关联的辅加信息
+        );
+
+        private void viewSettingOnClick(object sender, RoutedEventArgs e)
+        {
+            new FrontFramework.Utils.ViewSetting.ViewSetting(this).ShowDialog();
+        }
     }
 
     #region 报警声音操作

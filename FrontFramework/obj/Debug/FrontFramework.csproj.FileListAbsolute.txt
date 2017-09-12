@@ -101,3 +101,5 @@ C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramewo
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\MahApps.Metro.IconPacks.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\MahApps.Metro.IconPacks.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\MahApps.Metro.IconPacks.xml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\Utils\ViewSetting\ViewSetting.baml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\Utils\ViewSetting\ViewSetting.g.cs

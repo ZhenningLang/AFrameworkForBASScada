@@ -160,8 +160,15 @@
     <Compile Include="Utils\Print\PrintHelper.cs" />
     <Compile Include="Utils\PropUtilFactory.cs" />
     <Compile Include="Utils\Spring\SpringUtil.cs" />
+    <Compile Include="Utils\ViewSetting\ViewSetting.xaml.cs">
+      <DependentUpon>ViewSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\XmlBasedPropUtil.cs" />
     <Compile Include="Utils\PropertyUtilInterface.cs" />
+    <Page Include="Utils\ViewSetting\ViewSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Resource Include="resources\icon.png" />
     <Resource Include="resources\images\leftArrow.png" />
     <Resource Include="resources\images\rightArrow.png" />
@@ -191,6 +198,8 @@
     <None Include="packages.config" />
     <None Include="resources\Initial.png" />
     <SplashScreen Include="resources\start.png" />
+    <Resource Include="resources\images\MainScreen.png" />
+    <Resource Include="resources\images\Screen.png" />
     <Content Include="resources\sounds\alarm.wav" />
     <Resource Include="resources\configs\config.xml" />
     <Page Include="Common\Views\AboutBox.xaml">

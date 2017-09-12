@@ -80,12 +80,14 @@
                     </MenuItem>
                     <MenuItem Name="menuTools" Header="工具"
                               Foreground="Black" HorizontalAlignment="Left">
+                        <!-- 
                         <MenuItem Name="menuPrint" Header="打印" Click="printOnClick">
                             <MenuItem.Icon>
                                 <Image Source="resources/images/print.png"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Name="menuPrintScr" Header="截图">
+                        -->
+                        <MenuItem Name="menuSnapshot" Header="截图" Click="snapshotOnClick">
                             <MenuItem.Icon>
                                 <Image Source="resources/images/screenshot.png"/>
                             </MenuItem.Icon>
@@ -106,19 +108,23 @@
                     </MenuItem>
                     <MenuItem Name="menuView" Header="视图" 
                               Foreground="Black" HorizontalAlignment="Left">
+                        <MenuItem Name="viewSettingMenu" Header="视图设置" Click="viewSettingOnClick"/>
+                        <Separator/>
                         <MenuItem Name="normalScreenMenu" Header="普通模式" Click="normalScreenOnClick"/>
-                        <MenuItem Name="fullScreenMenu" Header="全屏模式" ToolTip="Esc 退出" Click="fullScreenOnClick">
-                            <MenuItem.Icon>
-                                <Image Source="resources/images/fullscreen.png"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
+                        <!--
+                            <MenuItem Name="fullScreenMenu" Header="全屏模式" ToolTip="Esc 退出" Click="fullScreenOnClick">
+                                <MenuItem.Icon>
+                                    <Image Source="resources/images/fullscreen.png"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        -->
                         <MenuItem Name="floatScreenMenu" Header="悬浮窗模式" Click="floatScreenOnClick">
                             <MenuItem.Icon>
                                 <Image Source="resources/images/float window.png"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator></Separator>
-                        <MenuItem Name="multiPageMenu" Header="多页" PreviewMouseLeftButtonUp="multiPageMenuOnClick">
+                        <MenuItem Name="multiPageMenu" Header="多页">
                             <MenuItem.Icon>
                                 <Image Source="resources/images/doublePage.png"/>
                             </MenuItem.Icon>
@@ -133,7 +139,7 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Name="multiScreenMenu" Header="多屏幕扩展" PreviewMouseLeftButtonUp="multiScreenMenuOnClick">
+                        <MenuItem Name="multiMonitorMenu" Header="多屏幕扩展">
                             <MenuItem.Icon>
                                 <Image Source="resources/images/multiScreen.png"/>
                             </MenuItem.Icon>

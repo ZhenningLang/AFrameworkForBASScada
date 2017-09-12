@@ -401,4 +401,20 @@
     <chinese>四</chinese>
     <english>Quadruple</english>
   </group>
+  <group id="Setting">
+    <chinese>设置</chinese>
+    <english>Setting</english>
+  </group>
+  <group id="Mode">
+    <chinese>模式</chinese>
+    <english>Mode</english>
+  </group>
+  <group id="Multiple">
+    <chinese>多</chinese>
+    <english>Multiple</english>
+  </group>
+  <group id="Monitor">
+    <chinese>显示器</chinese>
+    <english>Monitor</english>
+  </group>
 </translations>
