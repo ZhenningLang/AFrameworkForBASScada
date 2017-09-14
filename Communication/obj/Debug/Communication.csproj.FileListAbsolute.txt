@@ -11,4 +11,3 @@ C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communicatio
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\MahApps.Metro.IconPacks.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\MahApps.Metro.IconPacks.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\bin\Debug\MahApps.Metro.IconPacks.xml
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Communication\obj\Debug\Communication.csprojResolveAssemblyReference.cache

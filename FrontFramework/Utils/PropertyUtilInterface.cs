@@ -20,6 +20,7 @@ namespace FrontFramework.Utils
         /// <param name="name"></param>
         /// <returns></returns>
         Dictionary<String, Dictionary<String, String>> getListStrProp(String name);
+        OptResult setListStrProp(String name, Dictionary<String, Dictionary<String, String>> value); 
         Dictionary<String, Dictionary<String, String>> getListStrProp(String name, String propName, String propVal);
     }
 }

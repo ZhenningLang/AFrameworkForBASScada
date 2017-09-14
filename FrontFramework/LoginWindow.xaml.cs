@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using Enumeration;
 using Translation;
 using Translation.XMLBasedLanguage;
+using FrontFramework.Utils;
 
 namespace FrontFramework
 {
@@ -26,12 +27,19 @@ namespace FrontFramework
     public partial class LoginWindow : ComponentDynamicTranslate
     {
         private static ITranslator translator = TranslatorBasedOnXML.getTranslator();
+        private static PropertyUtilInterface propUtil = PropUtilFactory.getPropUtil();
         public LoginWindow()
         {
             InitializeComponent();
-            translator.recoveryFromHistory();
+            globalInitial();
             initializeComponentContents();
             LanguageChangedNotifier.getInstance().addListener(this);
+        }
+
+        private void globalInitial()
+        {
+            translator.recoveryFromHistory();
+            propUtil.loadProperty("resources/configs/config.xml");
         }
 
         ~LoginWindow() 

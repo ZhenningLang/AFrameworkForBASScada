@@ -96,6 +96,7 @@ namespace FrontFramework.Utils
                 result.result = false;
                 result.info = er.ToString();
             }
+            reloadProperty();
             return result;
         }
 
@@ -110,11 +111,11 @@ namespace FrontFramework.Utils
             if (propName != null)
             {
                 itemList = (XmlNodeList)xmlDoc.SelectNodes(
-                    "//property[@type='list'][@" + propName + "='" + propVal + "']/item");
+                    "//property[@type='list'][@" + propName + "='" + propVal + "'][@id='" + name + "']/item");
             }
             else
             {
-                itemList = (XmlNodeList)xmlDoc.SelectNodes("//property[@type='list']/item");
+                itemList = (XmlNodeList)xmlDoc.SelectNodes("//property[@type='list'][@id='" + name + "']/item");
             }
             foreach (XmlNode node in itemList) 
             {
@@ -127,6 +128,35 @@ namespace FrontFramework.Utils
             }
             return rVal;
         }
+        public OptResult setListStrProp(String name, Dictionary<String, Dictionary<String, String>> value)
+        {
+            OptResult result = new OptResult(true);
+            try
+            {
+                XmlElement node = (XmlElement)xmlDoc.SelectSingleNode("//property[@id='" + name + "']");
+                node.InnerXml = "";
+                foreach (var item in value) 
+                {
+                    XmlElement innerNode = xmlDoc.CreateElement("item");
+                    innerNode.InnerText = item.Key.Trim();
+                    foreach (var prop in item.Value) 
+                    {
+                        XmlAttribute attr = xmlDoc.CreateAttribute(prop.Key.Trim());
+                        attr.Value = prop.Value.Trim();
+                        innerNode.Attributes.Append(attr);
+                    }
+                    node.AppendChild(innerNode);
+                }
 
+                xmlDoc.Save(fileName);
+            }
+            catch (Exception er)
+            {
+                result.result = false;
+                result.info = er.ToString();
+            } 
+            reloadProperty();
+            return result;
+        }
     }
 }

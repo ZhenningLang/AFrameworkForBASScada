@@ -1,0 +1,110 @@
+﻿<Controls:MetroWindow  x:Class="FrontFramework.Plugin.Views.PluginManageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        Icon="../../resources/icon.png" 
+        FontSize="16" 
+        FontFamily="等线"
+        WindowStartupLocation ="CenterScreen"
+        Title="PluginManageWindow" Height="300" SizeToContent="Width" ResizeMode="NoResize">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"></ColumnDefinition>
+            <ColumnDefinition Width="230"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Margin="3 3 10 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <Grid Name="pathDisplayArea">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0">Path 1</Label>
+                    <Label Grid.Row="1">Path 2</Label>
+                    <Label Grid.Row="2">Path 3</Label>
+                    <Label Grid.Row="3">Path 4</Label>
+                    <Label Grid.Row="4">Path 5</Label>
+                    <Label Grid.Row="5">Path 6</Label>
+                    <Label Grid.Row="6">Path 7</Label>
+                    <Label Grid.Row="7">Path 8</Label>
+                    <Label Grid.Row="8">Path 9</Label>
+                </Grid>
+            </ScrollViewer>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Name="addButton" Grid.Column="0" Click="okButtonOnClick"
+                    FontSize="16" FontFamily="等线" Margin="20 10 10 10" Background="#FF5FBF5F" Foreground="White" ToolTip="Add Plugin">
+                    Button
+                </Button>
+                <Button Name="delButton"  Grid.Column="1" Click="delButtonOnClick"
+                    FontSize="16" FontFamily="等线" Margin="10 10 20 10" Background="#FFD9534F" Foreground="White" ToolTip="Delete Plugin">
+                    Button
+                </Button>
+            </Grid>
+        </Grid>
+        <ScrollViewer Grid.Column="1" Margin="10 3 0 3" BorderBrush="LightBlue" BorderThickness="2"
+                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid Name="pluginDisplayArea">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0">Plugin 1</Label>
+                <Label Grid.Row="1">Plugin 2</Label>
+                <Label Grid.Row="2">Plugin 3</Label>
+                <Label Grid.Row="3">Plugin 4</Label>
+                <Label Grid.Row="4">Plugin 5</Label>
+                <Label Grid.Row="5">Plugin 6</Label>
+                <Label Grid.Row="6">Plugin 7</Label>
+                <Label Grid.Row="7">Plugin 8</Label>
+                <Label Grid.Row="8">Plugin 9</Label>
+            </Grid>
+        </ScrollViewer>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" FontSize="16" FontFamily="等线" Margin="10" 
+                    Content="{iconPacks:PackIconMaterial arrowup}" Width="30" 
+                    Height="30" VerticalAlignment="Bottom" ToolTip="Move Up"
+                    Click="moveUpOnClick"/>
+            <Button Name="enableButton" Grid.Row="1" FontSize="16" FontFamily="等线" Margin="10" 
+                    Content="{iconPacks:PackIconMaterial checkboxmarkedoutline}" 
+                    Width="30" Height="30" VerticalAlignment="Center" ToolTip="Enable/Disable"
+                    Click="enableOnClick"/>
+            <!-- checkboxblankoutline checkboxmarkedoutline -->
+            <Button Grid.Row="2" FontSize="16" FontFamily="等线" Margin="10" 
+                    Content="{iconPacks:PackIconMaterial arrowdown}" Width="30" 
+                    Height="30" VerticalAlignment="Top" ToolTip="Move Down"
+                    Click="moveDownOnClick"/>
+        </Grid>
+    </Grid>
+    </Controls:MetroWindow>
+

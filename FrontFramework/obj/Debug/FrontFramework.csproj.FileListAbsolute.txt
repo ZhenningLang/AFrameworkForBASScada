@@ -103,3 +103,12 @@ C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramewo
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\MahApps.Metro.IconPacks.xml
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\Utils\ViewSetting\ViewSetting.baml
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\Utils\ViewSetting\ViewSetting.g.cs
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\Plugin\Views\PluginManageWindow.baml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\Plugin\Views\PluginManageWindow.g.cs
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\Plugin\Views\DeleteVerify.baml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\Plugin\Views\DeleteVerify.g.cs
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\obj\Debug\FrontFramework.csproj.ResolveComReference.cache
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml

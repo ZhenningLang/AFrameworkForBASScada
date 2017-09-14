@@ -103,7 +103,7 @@
                         </MenuItem>
                     </MenuItem>
                     <MenuItem Name="menuPlugin" Header="插件"
-                              Foreground="Black" HorizontalAlignment="Left">
+                              Foreground="Black" HorizontalAlignment="Left" Click="pluginMenuOnClick">
                         <MenuItem Name="menuPluginManager" Header="插件管理"/>
                     </MenuItem>
                     <MenuItem Name="menuView" Header="视图" 

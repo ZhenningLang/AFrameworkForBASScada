@@ -1,0 +1,30 @@
+﻿<Controls:MetroWindow x:Class="FrontFramework.Plugin.Views.DeleteVerify"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        Icon="../../resources/icon.png" ResizeMode="NoResize"
+        FontSize="16" FontFamily="等线" SizeToContent="WidthAndHeight">
+    <Grid Margin="3">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Name="displayLabel" Grid.Row="0" 
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="等线"> Label </Label>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Name="okButton" Grid.Column="0" Margin="2 5 2 2" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    FontSize="12" FontFamily="等线" IsDefault="True"
+                    Background="#FF337AB7" Foreground="White" Click="okOnClick">Button</Button>
+            <Button Name="cancelButton" Grid.Column="1" Margin="2 5 2 2" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    FontSize="12" FontFamily="等线" IsCancel="True"
+                    Background="#FFD9534F" Foreground="White" >Button</Button>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

@@ -417,4 +417,12 @@
     <chinese>显示器</chinese>
     <english>Monitor</english>
   </group>
+  <group id="Manager">
+    <chinese>管理器</chinese>
+    <english>Manager</english>
+  </group>
+  <group id="Sure">
+    <chinese>确认</chinese>
+    <english>Sure</english>
+  </group>
 </translations>

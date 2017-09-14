@@ -2,6 +2,7 @@
 using FrontFramework.Enums;
 using FrontFramework.Help;
 using FrontFramework.Language;
+using FrontFramework.Plugin;
 using FrontFramework.Station;
 using FrontFramework.Utils;
 using FrontFramework.Utils.Print;
@@ -41,21 +42,14 @@ namespace FrontFramework
     public partial class MainWindow : ComponentDynamicTranslate
     {
         // 单例变量
-        private static PropertyUtilInterface propUtil = null;
-        private static ITranslator translator = null;
+        private static PropertyUtilInterface propUtil = PropUtilFactory.getPropUtil();
+        private static ITranslator translator = TranslatorFactory.getTranslator(); 
 
         public MainWindow()
         {
             try
             {
                 InitializeComponent();
-                // 辅助类初始化
-                propUtil = PropUtilFactory.getPropUtil();
-                translator = TranslatorFactory.getTranslator();
-                // 加载插件 dll
-                Compose(); 
-                // 加载系统配置文件
-                propUtil.loadProperty("resources/configs/config.xml");
                 // 窗体所有文字初始化与监听注册
                 initializeComponentContents();
                 LanguageChangedNotifier.getInstance().addListener(this);
@@ -361,9 +355,9 @@ namespace FrontFramework
         private void WindowClosed(object sender, EventArgs e)
         {
             LanguageChangedNotifier.getInstance().removeListener(this);
-            foreach (AbstractPlugin plugin in plugins)
+            foreach (PluginInfo pluginInfo in pluginManager.pluginInfos)
             {
-                plugin.closeListeningThread();
+                pluginInfo.plugin.closeListeningThread();
             }
         }
 
@@ -675,6 +669,11 @@ namespace FrontFramework
         {
             new FrontFramework.Utils.ViewSetting.ViewSetting(this).ShowDialog();
         }
+
+        private void pluginMenuOnClick(object sender, RoutedEventArgs e)
+        {
+            new FrontFramework.Plugin.Views.PluginManageWindow(this).ShowDialog();
+        }
     }
 
     #region 报警声音操作
@@ -856,9 +855,9 @@ namespace FrontFramework
             {
                 Console.WriteLine(er.ToString());
             }
-            foreach (AbstractPlugin plugin in plugins)
+            foreach (PluginInfo pluginInfo in pluginManager.pluginInfos)
             {
-                plugin.setStationCode(stationCode);
+                pluginInfo.plugin.setStationCode(stationCode);
             }
             comboBoxStation.SelectedValue = stationCode;
         }
@@ -867,9 +866,9 @@ namespace FrontFramework
             if (comboBoxStation.SelectedValue != null)
             {
                 stationCode = (int)comboBoxStation.SelectedValue;
-                foreach (AbstractPlugin plugin in plugins)
+                foreach (PluginInfo pluginInfo in pluginManager.pluginInfos)
                 {
-                    plugin.setStationCode(stationCode);
+                    pluginInfo.plugin.setStationCode(stationCode);
                 }
                 propUtil.setStrProp("historyStationCode", stationCode.ToString());
             }
@@ -888,29 +887,8 @@ namespace FrontFramework
     public partial class MainWindow : ComponentDynamicTranslate 
     {
 
-        // 变量定义
-        [ImportMany]
-        public List<AbstractPlugin> plugins { get; set; } // 插件
+        private static PluginManager pluginManager = PluginManager.getPluginManager();
         private Dictionary<String, Page> pageDic = new Dictionary<string, Page>(); // View Switch Menu ID - Page Thread
-
-        /// <summary>
-        /// 加载插件
-        /// </summary>
-        private void Compose()
-        {
-            var catalog = new AggregateCatalog();
-            catalog.Catalogs.Add(new DirectoryCatalog("plugins"));
-            var container = new CompositionContainer(catalog);
-            //将部件（part）和宿主程序添加到组合容器
-            try
-            {
-                container.ComposeParts(this);
-            }
-            catch (CompositionException compositionException)
-            {
-                Console.WriteLine(compositionException.ToString());
-            }
-        }
 
         /// <summary>
         /// 主要负责初始化插件在界面中的显示与一些点击回调函数
@@ -937,14 +915,18 @@ namespace FrontFramework
             ViewSwitchTabControl.Items.Clear();
             // 添加新显示
             pageDic.Clear();
-            foreach (AbstractPlugin plugin in plugins)
+            foreach (PluginInfo pluginInfo in pluginManager.pluginInfos)
             {
+                if (!pluginInfo.isActive) 
+                {
+                    continue;
+                }
                 // menu
                 MenuItem item = new MenuItem();
-                if (plugin.getMenuId() != null)
+                if (pluginInfo.plugin.getMenuId() != null)
                 {
-                    item.Header = translator.getComponentTranslation(plugin.getMenuId().Split(' '));
-                    foreach (String str in plugin.getMenuItemsId())
+                    item.Header = translator.getComponentTranslation(pluginInfo.plugin.getMenuId().Split(' '));
+                    foreach (String str in pluginInfo.plugin.getMenuItemsId())
                     {
                         MenuItem childItem = new MenuItem();
                         childItem.Header = translator.getComponentTranslation(str.Split(' '));
@@ -957,7 +939,7 @@ namespace FrontFramework
                 // view switch menu
                 TabItem tabItem = new TabItem();
                 Label tabHeaderLable = new Label();
-                tabHeaderLable.Content = translator.getComponentTranslation(plugin.getViewSwitchMenuId().Split(' '));
+                tabHeaderLable.Content = translator.getComponentTranslation(pluginInfo.plugin.getViewSwitchMenuId().Split(' '));
                 tabHeaderLable.FontSize = 16;
                 tabHeaderLable.FontFamily = new FontFamily("等线");
                 tabItem.Header = tabHeaderLable;
@@ -980,7 +962,7 @@ namespace FrontFramework
                 };
                 Menu switchMenu = new Menu();
                 switchMenu.FontSize = 3;
-                foreach (var view in plugin.getViewSwitchPages())
+                foreach (var view in pluginInfo.plugin.getViewSwitchPages())
                 {
                     MenuItem childItem = new MenuItem();
                     childItem.Header = translator.getComponentTranslation(view.Key.Split(' '));
@@ -993,22 +975,22 @@ namespace FrontFramework
                 ViewSwitchTabControl.Items.Add(tabItem);
                 ViewSwitchTabControl.SelectedIndex = 0;
                 // view switch page
-                foreach (var id2page in plugin.getViewSwitchPages())
+                foreach (var id2page in pluginInfo.plugin.getViewSwitchPages())
                 {
                     pageDic.Add(id2page.Key.Replace(" ", ""), id2page.Value);
                 }
                 // event listener
-                plugin.sendEvent += pluginEventHappend;
+                pluginInfo.plugin.sendEvent += pluginEventHappend;
             }
         }
 
         private void pluginEventHappend(BasEvent e)
         {
-            foreach (var plugin in plugins)
+            foreach (PluginInfo pluginInfo in pluginManager.pluginInfos)
             {
-                if (e.eventDestination.Contains<String>(plugin.getPluginId()))
+                if (e.eventDestination.Contains<String>(pluginInfo.plugin.getPluginId()))
                 {
-                    plugin.trigger(e);
+                    pluginInfo.plugin.trigger(e);
                 }
             }
         }

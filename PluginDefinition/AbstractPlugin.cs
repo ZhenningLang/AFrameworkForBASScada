@@ -18,6 +18,7 @@ namespace PluginDefinition
         protected ConcurrentQueue<BasEvent> basEventQueue = new ConcurrentQueue<BasEvent>();
         protected Communication.IComm fcmpComm = FCMPCommunication.getFCMPCommInstance();
         protected Communication.IComm redisComm = RedisCommunication.getRedisCommInstance();
+        private Thread listeningThread = null;
 
         public AbstractPlugin()
         {
@@ -32,7 +33,7 @@ namespace PluginDefinition
         public void pluginInitial()
         {
             // 监听线程初始化
-            Thread listeningThread = new Thread(new ThreadStart(this.observeBasEventQueue));
+            listeningThread = new Thread(new ThreadStart(this.observeBasEventQueue));
             listeningThread.Name = "Thread: " + getPluginId();
             listeningThread.Start();
         }
