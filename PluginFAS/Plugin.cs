@@ -19,16 +19,6 @@ namespace PluginFAS
         private static readonly String[] menuItemsID = { "Report Fas Alarm" };
         private static readonly String viewSwitchMenuId = "Fas Module";
         private static readonly String[] viewSwitchMenuItemsId = { "Fas Alarm Page", "Fas Temperature Page" };
-        // event enum
-        public enum ReceivableEventsIdEnum
-        {
-            ReportFasAlarm
-        }
-        public enum EmittedEventsIdEnum
-        {
-            FasFireAlarmAppear,
-            FasFireAlarmDisappear
-        }
         // constructor
         FakeTemperature temp1 = null;
         FakeTemperature temp2 = null;
@@ -52,13 +42,17 @@ namespace PluginFAS
             alarm.observers.Add(this);
         }
 
+        public override void initializeComponentContents()
+        {
+            Console.WriteLine("Language changed");
+        }
         public void action(Object obj)
         {
-            if (sendEvent != null)
+            if (systemEventHandler != null)
             {
                 if (((FasAlarm)obj).alarm)
                 {
-                    sendEvent(new BasEvent() 
+                    systemEventHandler(new BasEvent() 
                     {
                         eventSource = this.getPluginId(),
                         eventDestination = new List<string>() { "Door Plugin" },
@@ -68,7 +62,7 @@ namespace PluginFAS
                 }
                 else
                 {
-                    sendEvent(new BasEvent()
+                    systemEventHandler(new BasEvent()
                     {
                         eventSource = this.getPluginId(),
                         eventDestination = new List<string>() { "Door Plugin" },
@@ -84,13 +78,11 @@ namespace PluginFAS
         {
             return Plugin.pluginId;
         }
-        override public String getMenuId()
+        override public MenuNode getMenuRoot() 
         {
-            return Plugin.menuID;
-        }
-        override public List<String> getMenuItemsId()
-        {
-            return new List<string>(Plugin.menuItemsID);
+            MenuNode node = new MenuNode();
+            node.setMenuID("Report Fas Alarm");
+            return node;
         }
         override public String getViewSwitchMenuId()
         {
@@ -122,11 +114,28 @@ namespace PluginFAS
         }
         override protected void eventHandler(BasEvent e)
         {
+            Console.WriteLine(e.ToString());
             if (e.eventName.Trim().ToLower().Equals(ReceivableEventsIdEnum.ReportFasAlarm.ToString().Trim().ToLower())) 
             {
-                this.alarm.alarm = true;
+                this.alarm.setAlarm(true);
             }
         }
+        override protected void stationCodeChanged()
+        {
+            Console.WriteLine("Station code is changed to " + this.stationCode);
+        }
+    }
+
+
+    // event enum
+    public class ReceivableEventsIdEnum
+    {
+        public static String ReportFasAlarm = "Report Fas Alarm";
+    }
+    public class EmittedEventsIdEnum
+    {
+        public static String FasFireAlarmAppear = "FasFireAlarmAppear";
+        public static String FasFireAlarmDisappear = "FasFireAlarmDisappear";
     }
 
     public interface Observer 

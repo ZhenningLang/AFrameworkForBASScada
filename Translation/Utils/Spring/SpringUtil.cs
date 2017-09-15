@@ -16,10 +16,6 @@ namespace Translation.Utils.Spring
             try
             {
                 ctx = new XmlApplicationContext("resources//configs//springTrans.xml");
-                foreach (String str in ctx.GetObjectDefinitionNames()) 
-                {
-                    Console.WriteLine(str);
-                }
             }
             catch (Exception e)
             {

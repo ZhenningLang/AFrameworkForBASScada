@@ -32,18 +32,32 @@ namespace PluginDoor
             observers.Add(doorPage);
         }
 
+        public override void initializeComponentContents()
+        {
+            Console.WriteLine("Language changed");
+        }
         // override
         override public String getPluginId()
         {
             return Plugin.pluginId;
         }
-        override public String getMenuId()
+        override public MenuNode getMenuRoot()
         {
-            return Plugin.menuID;
-        }
-        override public List<String> getMenuItemsId()
-        {
-            return new List<string>(Plugin.menuItemsID);
+            MenuNode menu0 = new MenuNode();
+            menu0.setMenuID("Door Menu Root");
+            MenuNode menu11 = new MenuNode();
+            menu11.setMenuID("Door Menu Level 1-1");
+            MenuNode menu12 = new MenuNode();
+            menu12.setMenuID("Door Menu Level 1-2");
+            MenuNode menu111 = new MenuNode();
+            menu111.setMenuID("Door Menu Level 2-1");
+            MenuNode menu112 = new MenuNode();
+            menu112.setMenuID("Door Menu Level 2-2");
+            menu0.getChildrenMenus().Add(menu11);
+            menu0.getChildrenMenus().Add(menu12);
+            menu11.getChildrenMenus().Add(menu111);
+            menu11.getChildrenMenus().Add(menu112);
+            return menu0;
         }
         override public String getViewSwitchMenuId()
         {
@@ -83,6 +97,10 @@ namespace PluginDoor
                     obs.action("open");
                 }
             }
+        }
+        override protected void stationCodeChanged()
+        {
+            Console.WriteLine("Station code is changed to " + this.stationCode);
         }
     }
 

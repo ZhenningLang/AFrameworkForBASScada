@@ -45,9 +45,12 @@ namespace FrontFramework.Plugin
             {
                 pluginInfo.plugin.closeListeningThread();
             }
+            // 清除原有数据
             pluginInfos.Clear();
-            foreach (var plugin in plugins) 
+            foreach (var plugin in plugins)
             {
+                plugin.setUserName(MainWindow.getUserName());
+                plugin.setOperationLevel(MainWindow.getOperationLevel());
                 String pluginID = plugin.getPluginId();
                 PluginInfo pluginInfo = new PluginInfo(pluginID, 0, true, plugin);
                 if (infosTemp.ContainsKey(pluginID))

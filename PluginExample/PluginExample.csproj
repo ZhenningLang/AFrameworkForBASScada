@@ -91,9 +91,21 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Comm\Common.csproj">
+      <Project>{b1fab640-5426-4266-867b-dfcb6ff71ec5}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Enumeration\Enumeration.csproj">
+      <Project>{06094f56-cf1f-490d-beac-7ed947d75f69}</Project>
+      <Name>Enumeration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PluginDefinition\PluginDefinition.csproj">
       <Project>{bff1fca5-c961-471b-ab12-50e8e3248dcd}</Project>
       <Name>PluginDefinition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Translation\Translation.csproj">
+      <Project>{ebd239d1-8d44-44e4-bf51-9bb7f19b5656}</Project>
+      <Name>Translation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

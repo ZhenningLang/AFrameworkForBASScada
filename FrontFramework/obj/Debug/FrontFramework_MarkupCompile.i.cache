@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\App.xaml
-11-1573331142
+121751943119
 11847953736
-33-1061710433
+34-792989039
 462139931492
-Plugin\Views\DeleteVerify.xaml;Plugin\Views\PluginManageWindow.xaml;Utils\ViewSetting\ViewSetting.xaml;Common\Views\AboutBox.xaml;Common\Views\Alert.xaml;Language\Views\Delete.xaml;Language\Views\DictionaryEditor.xaml;Language\Views\Add.xaml;Language\Views\Edit.xaml;LoginWindow.xaml;MainWindow.xaml;
+Alarm\Views\AlarmDetails.xaml;Plugin\Views\DeleteVerify.xaml;Plugin\Views\PluginManageWindow.xaml;Utils\ViewSetting\ViewSetting.xaml;Common\Views\AboutBox.xaml;Common\Views\Alert.xaml;Language\Views\Delete.xaml;Language\Views\DictionaryEditor.xaml;Language\Views\Add.xaml;Language\Views\Edit.xaml;LoginWindow.xaml;MainWindow.xaml;
 resources\start.png
 False
 

@@ -18,6 +18,7 @@ using Enumeration;
 using Translation;
 using Translation.XMLBasedLanguage;
 using FrontFramework.Utils;
+using Common;
 
 namespace FrontFramework
 {
@@ -70,14 +71,16 @@ namespace FrontFramework
             String userName = userNameTextbox.Text;
             String password = passwordTextbox.Password;
             // loginResult 应该调用后台接口获得
-            bool loginResult = true; // <<------------------------------------------------------------------------
+            // Common.OptResult loginResult = login(userName, password);
+            OperationLevelEnum optLevel = OperationLevelEnum.ADMINISTRATOR;
+            OptResult loginResult = new OptResult(true,optLevel.ToString()); // <<------------------------------------------------------------------------
             if (userName.Equals("JENNINGLANG") && password.Equals("JENNINGLANG")) 
             {
-                loginResult = true;
+                loginResult.result = true;
             }
-            if (loginResult)
+            if (loginResult.result)
             {
-                FrontFramework.MainWindow mainWindow = new FrontFramework.MainWindow();
+                FrontFramework.MainWindow mainWindow = new FrontFramework.MainWindow(userName, optLevel);
                 mainWindow.Show();
                 this.Close();
             } 

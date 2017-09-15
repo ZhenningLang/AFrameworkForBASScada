@@ -1,14 +1,14 @@
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\Enumeration.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\Enumeration.pdb
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\obj\Debug\Enumeration.dll
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\obj\Debug\Enumeration.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\ControlzEx.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\MahApps.Metro.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\MahApps.Metro.IconPacks.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\System.Windows.Interactivity.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\ControlzEx.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\MahApps.Metro.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\MahApps.Metro.xml
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\MahApps.Metro.IconPacks.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\MahApps.Metro.IconPacks.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\bin\Debug\MahApps.Metro.IconPacks.xml
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\obj\Debug\Enumeration.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\obj\Debug\Enumeration.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\Enumeration\obj\Debug\Enumeration.csprojResolveAssemblyReference.cache

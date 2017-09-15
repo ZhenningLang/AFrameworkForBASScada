@@ -1,5 +1,3 @@
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\plugins\PluginFAS.dll
-C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\plugins\PluginFAS.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\obj\Debug\PluginFAS.csprojResolveAssemblyReference.cache
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\obj\Debug\AlarmPage.baml
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\obj\Debug\TempPage.baml
@@ -9,5 +7,8 @@ C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\ob
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\obj\Debug\PluginFAS.g.resources
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\obj\Debug\PluginFAS.Properties.Resources.resources
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\obj\Debug\PluginFAS.csproj.GenerateResource.Cache
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\plugins\PluginFAS.dll
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\plugins\PluginFAS.pdb
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\obj\Debug\PluginFAS.dll
 C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\PluginFAS\obj\Debug\PluginFAS.pdb
+C:\Users\JackL\documents\visual studio 2013\Projects\FrontFramework\FrontFramework\bin\Debug\plugins\Utils\Spring\App.config

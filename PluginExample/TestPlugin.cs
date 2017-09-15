@@ -35,18 +35,18 @@ namespace PluginExample
             
         }
 
+        public override void initializeComponentContents()
+        {
+            Console.WriteLine("Language changed");
+        }
         // override
         override public String getPluginId()
         {
             return TestPlugin.pluginId;
         }
-        override public String getMenuId()
+        override public MenuNode getMenuRoot() 
         {
-            return TestPlugin.menuID;
-        }
-        override public List<String> getMenuItemsId()
-        {
-            return new List<string>(TestPlugin.menuItemsID);
+            return null;
         }
         override public String getViewSwitchMenuId()
         {
@@ -78,6 +78,10 @@ namespace PluginExample
         }
         override protected void eventHandler(BasEvent e) 
         {
+        }
+        override protected void stationCodeChanged()
+        {
+            Console.WriteLine("Station code is changed to " + this.stationCode);
         }
     }
 }

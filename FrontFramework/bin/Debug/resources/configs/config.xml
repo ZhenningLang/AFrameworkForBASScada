@@ -3,7 +3,7 @@
   <!-- 报警音量大小 -->
   <property id="historyVolume">7.47065897065897</property>
   <!-- 所选车站站码 -->
-  <property id="historyStationCode">10</property>
+  <property id="historyStationCode">5</property>
   <!-- 是多页还是多显示器 multipage multimonitor -->
   <property id="multiMode">multimonitor</property>
   <!-- 多屏幕模式: 行 列 主屏逻辑坐标 -->

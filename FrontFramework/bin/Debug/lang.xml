@@ -425,4 +425,8 @@
     <chinese>确认</chinese>
     <english>Sure</english>
   </group>
+  <group id="Operation">
+    <chinese>操作</chinese>
+    <english>Operation</english>
+  </group>
 </translations>

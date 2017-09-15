@@ -8,13 +8,17 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using Communication.FCMP;
 using Communication.Redis;
+using Enumeration;
+using Translation;
 
 namespace PluginDefinition
 {
 
-    public abstract class AbstractPlugin
+    public abstract class AbstractPlugin : ComponentDynamicTranslate
     {
         protected int stationCode;
+        protected String userName = "";
+        protected OperationLevelEnum operationLevel = OperationLevelEnum.OBSERVER;
         protected ConcurrentQueue<BasEvent> basEventQueue = new ConcurrentQueue<BasEvent>();
         protected Communication.IComm fcmpComm = FCMPCommunication.getFCMPCommInstance();
         protected Communication.IComm redisComm = RedisCommunication.getRedisCommInstance();
@@ -24,9 +28,11 @@ namespace PluginDefinition
         {
             pluginInitial();
         }
-        public AbstractPlugin(int stationCode)
+        public AbstractPlugin(int stationCode, String userName, OperationLevelEnum operationLevel)
         {
             this.stationCode = stationCode;
+            this.userName = userName;
+            this.operationLevel = operationLevel;
             pluginInitial();
         }
 
@@ -36,6 +42,13 @@ namespace PluginDefinition
             listeningThread = new Thread(new ThreadStart(this.observeBasEventQueue));
             listeningThread.Name = "Thread: " + getPluginId();
             listeningThread.Start();
+            // 
+            LanguageChangedNotifier.getInstance().addListener(this);
+        }
+        public abstract void initializeComponentContents(); // a hook
+        ~AbstractPlugin()
+        {
+            LanguageChangedNotifier.getInstance().removeListener(this);
         }
 
         private volatile Boolean observerControl = true;
@@ -72,18 +85,54 @@ namespace PluginDefinition
         public void setStationCode(int stationCode) // 设置站码
         {
             this.stationCode = stationCode;
+            stationCodeChanged();
         }
+        public void setUserName(String userName) // 设置站码
+        {
+            this.userName = userName;
+        }
+        public void setOperationLevel(OperationLevelEnum operationLevel) // 设置站码
+        {
+            this.operationLevel = operationLevel;
+        }
+        protected abstract void stationCodeChanged();
 
         #endregion
 
         #region 界面显示内容获取
 
-        public abstract String getPluginId(); // 获取插件 id
-        public abstract String getMenuId(); // 获取菜单 id
-        public abstract List<String> getMenuItemsId(); // 获取菜单子项 id
-        public abstract String getViewSwitchMenuId(); // 获取界面切换菜单 id
-        public abstract List<String> getViewSwitchMenuItemsId(); // 获取界面切换菜单子项 id
-        public abstract Dictionary<String, Page> getViewSwitchPages(); // 获取具体每个页面的引用 (界面切换菜单子项 id --- Page)
+        /// <summary>
+        /// 获取插件 id
+        /// </summary>
+        /// <returns></returns>
+        public abstract String getPluginId();
+
+        /// <summary>
+        /// 获取菜单树的根节点
+        /// 每个菜单触发点击事件时，框架会以 menuID 的事件 ID 发送给插件自行处理
+        /// </summary>
+        /// <returns></returns>
+        public abstract MenuNode getMenuRoot();
+
+        /// <summary>
+        /// 获取界面切换菜单 id
+        /// 被点击时，会通知插件
+        /// </summary>
+        /// <returns></returns>
+        public abstract String getViewSwitchMenuId();
+
+        /// <summary>
+        /// 获取界面切换菜单子项 id
+        /// 页面切换时，框架会以 switchMenuItemId 的事件 ID 发送给插件自行处理
+        /// </summary>
+        /// <returns></returns>
+        public abstract List<String> getViewSwitchMenuItemsId();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public abstract Dictionary<String, Page> getViewSwitchPages(); // 获取具体每个页面的引用 (switchMenuItemId --- Page)
         //public abstract Dictionary<String, Thread> getViewSwitchThreads(); // 获取具体每个页面线程 (界面切换菜单子项 id --- 线程)
 
         #endregion
@@ -110,18 +159,18 @@ namespace PluginDefinition
 
         #region 监听注册
 
-        public delegate void BasEventHandler(BasEvent basEvent);
-        public BasEventHandler sendEvent;
+        public delegate void SystemEventHandler(BasEvent basEvent);
+        public SystemEventHandler systemEventHandler;
 
         #endregion
 
         #region 报警消息处理相关
 
         public delegate void BasAlarmHandler(BasAlarm basAlarm);
-        public BasAlarmHandler sendAlarm;
+        public BasAlarmHandler basAlarmHandler;
         public abstract void confirmAlarm(BasAlarm basAlarm);
         public delegate void BasAlarmSolvedHandler(BasAlarm basAlarm);
-        public BasAlarmSolvedHandler sendSolvedAlarm;
+        public BasAlarmSolvedHandler basAlarmSolvedHandler;
 
         #endregion
         #region 报警消息处理相关
@@ -131,6 +180,7 @@ namespace PluginDefinition
 
     public class BasAlarm
     {
+        public String pluginId { get; set; }
         public String alarmId { get; set; }
         public String alarmType { get; set; }
         public AlarmLevelEnum alarmLevel { get; set; }
@@ -142,6 +192,7 @@ namespace PluginDefinition
     }
     public class BasEvent
     {
+        public BasEvent() { }
         public String eventSource { get; set; }
         public Boolean isBroadcast { get; set; }
         public List<String> eventDestination { get; set; }
@@ -171,4 +222,23 @@ namespace PluginDefinition
         II = 2,
         III = 3
     }
+
+    public class MenuNode 
+    {
+        private String menuID;
+        private List<MenuNode> childrenMenus = new List<MenuNode>();
+        public String getMenuID()
+        {
+            return this.menuID;
+        }
+        public void setMenuID(String menuID) 
+        {
+            this.menuID = menuID;
+        }
+        public List<MenuNode> getChildrenMenus()
+        {
+            return this.childrenMenus;
+        }
+    }
+
 }

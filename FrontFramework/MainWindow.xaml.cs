@@ -41,18 +41,33 @@ namespace FrontFramework
     /// </summary>
     public partial class MainWindow : ComponentDynamicTranslate
     {
+        private static String userName = "";
+        public static String getUserName() 
+        {
+            return MainWindow.userName;
+        }
+        private static OperationLevelEnum operationLevel = OperationLevelEnum.OBSERVER;
+        public static OperationLevelEnum getOperationLevel()
+        {
+            return MainWindow.operationLevel;
+        }
+
         // 单例变量
         private static PropertyUtilInterface propUtil = PropUtilFactory.getPropUtil();
-        private static ITranslator translator = TranslatorFactory.getTranslator(); 
+        private static ITranslator translator = TranslatorFactory.getTranslator();
 
-        public MainWindow()
+        public MainWindow(String userName, OperationLevelEnum operationLevel)
         {
+            MainWindow.userName = userName;
+            MainWindow.operationLevel = operationLevel;
             try
             {
                 InitializeComponent();
                 // 窗体所有文字初始化与监听注册
                 initializeComponentContents();
                 LanguageChangedNotifier.getInstance().addListener(this);
+                // 插件加载
+                pluginManager.loadPlugins();
                 // 报警模块初始化
                 AlarmModuleInit(); 
                 // “系统”菜单初始化（菜单中的系统选项）
@@ -82,7 +97,6 @@ namespace FrontFramework
             menuChinese.Header = translator.getComponentTranslation("Chinese");
             menuEnglish.Header = translator.getComponentTranslation("English");
             menuTools.Header = translator.getComponentTranslation("Tools");
-            //menuPrint.Header = translator.getComponentTranslation("Print");
             menuSnapshot.Header = translator.getComponentTranslation("PrintScr") + " (Ctrl+Shift+C)";
             menuDicManager.Header = translator.getComponentTranslation(new String[] { "Dictionary", "Manage" });
             menuAlarmTest.Header = translator.getComponentTranslation(new String[] { "Alarm", "Test" });
@@ -140,30 +154,6 @@ namespace FrontFramework
                 private void dicManagerOnClick(object sender, RoutedEventArgs e)
                 {
                     new FrontFramework.Language.Views.DictionaryEditor(this).ShowDialog();
-                }
-                private void printOnClick(object sender, RoutedEventArgs e)
-                {
-                    /*System.Windows.Controls.PrintDialog printDlg = new System.Windows.Controls.PrintDialog();
-                    //if ((bool)printDlg.ShowDialog().GetValueOrDefault())
-                    {
-                        // 为了进行深拷贝而序列化
-                        String mainViewXaml = System.Windows.Markup.XamlWriter.Save(MainViewFrameA);
-                        StringReader stringReader = new StringReader(mainViewXaml);
-                        XmlReader xmlReader = XmlReader.Create(stringReader);
-                        Frame clonedMainView = (Frame)XamlReader.Load(xmlReader);
-
-                        Size pageSize = new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight);
-                        clonedMainView.Measure(pageSize);
-                        clonedMainView.Arrange(new Rect(5, 5, pageSize.Width, pageSize.Height));
-                        //printDlg.PrintVisual(MainView, Title);
-                    }*/
-
-                    // 深拷贝
-                    String viewXaml = System.Windows.Markup.XamlWriter.Save(MainViewFrameA);
-                    StringReader stringReader = new StringReader(viewXaml);
-                    XmlReader xmlReader = XmlReader.Create(stringReader);
-                    FrameworkElement clonedView = (FrameworkElement)XamlReader.Load(xmlReader);
-                    PrintHelper.Print(clonedView);
                 }
             #endregion
 
@@ -510,7 +500,7 @@ namespace FrontFramework
         /// <param name="e"></param>
         private void addWindowMenuOnClick(object sender, RoutedEventArgs e)
         {
-            MainWindow appendWindow = new MainWindow();
+            MainWindow appendWindow = new MainWindow(MainWindow.userName, MainWindow.operationLevel);
             appendWindow.Show();
             appendWindow.Top = this.Top + 50;
             appendWindow.Left = this.Left + 50;
@@ -672,7 +662,23 @@ namespace FrontFramework
 
         private void pluginMenuOnClick(object sender, RoutedEventArgs e)
         {
+            PluginMenuHelper helper = (PluginMenuHelper)((MenuItem)e.Source).Header;
+            BasEvent basEvent = new BasEvent (){
+                eventSource = "FRAMEWORK",
+                isBroadcast = false,
+                eventDestination = new List<string>() { helper.pluginID },
+                eventName = helper.menuID,
+                eventParas = null};
+            pluginManager.getPluginInfoByID(helper.pluginID).plugin.trigger(basEvent);
+        }
+        private void pluginManagerMenuOnClick(object sender, RoutedEventArgs e)
+        {
             new FrontFramework.Plugin.Views.PluginManageWindow(this).ShowDialog();
+        }
+
+        private void alarmDetailsOnClick(object sender, RoutedEventArgs e)
+        {
+            new FrontFramework.Alarm.Views.AlarmDetails().Show();
         }
     }
 
@@ -922,18 +928,9 @@ namespace FrontFramework
                     continue;
                 }
                 // menu
-                MenuItem item = new MenuItem();
-                if (pluginInfo.plugin.getMenuId() != null)
+                MenuItem item = generateMenuFromTree(pluginInfo.plugin.getMenuRoot(), pluginInfo.pluginID);
+                if (item != null)
                 {
-                    item.Header = translator.getComponentTranslation(pluginInfo.plugin.getMenuId().Split(' '));
-                    foreach (String str in pluginInfo.plugin.getMenuItemsId())
-                    {
-                        MenuItem childItem = new MenuItem();
-                        childItem.Header = translator.getComponentTranslation(str.Split(' '));
-                        item.Items.Add(childItem);
-                    }
-                    item.Foreground = new SolidColorBrush(Colors.Black);
-                    item.HorizontalAlignment = HorizontalAlignment.Left;
                     mainMenu.Items.Insert(mainMenu.Items.Count, item);
                 }
                 // view switch menu
@@ -979,20 +976,63 @@ namespace FrontFramework
                 {
                     pageDic.Add(id2page.Key.Replace(" ", ""), id2page.Value);
                 }
-                // event listener
-                pluginInfo.plugin.sendEvent += pluginEventHappend;
+                // event handler
+                pluginInfo.plugin.systemEventHandler += systemEventHappend;
+                // alarm handler
+                pluginInfo.plugin.basAlarmHandler += pluginAlarmHappend;
+                pluginInfo.plugin.basAlarmSolvedHandler += pluginAlarmSolvedHappend;
             }
         }
-
-        private void pluginEventHappend(BasEvent e)
+        /// <summary>
+        /// 用于生成插件的系统菜单
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="pluginID"></param>
+        /// <returns></returns>
+        private MenuItem generateMenuFromTree(MenuNode root, String pluginID)
+        {
+            if (root == null)
+                return null;
+            MenuItem item = new MenuItem();
+            PluginMenuHelper helper = new PluginMenuHelper();
+            helper.pluginID = pluginID;
+            helper.menuID = root.getMenuID();
+            helper.displayContent = translator.getComponentTranslation(root.getMenuID().Split(' '));
+            item.Header = helper;
+            item.Foreground = new SolidColorBrush(Colors.Black);
+            item.HorizontalAlignment = HorizontalAlignment.Left;
+            if (root.getChildrenMenus().Count == 0) // 叶子节点
+            {
+                item.Click += pluginMenuOnClick;
+            }
+            foreach (MenuNode child in root.getChildrenMenus())
+            {
+                MenuItem childItem = generateMenuFromTree(child, pluginID);
+                item.Items.Add(childItem);
+            }
+            return item;
+        }
+        private void systemEventHappend(BasEvent e)
         {
             foreach (PluginInfo pluginInfo in pluginManager.pluginInfos)
             {
-                if (e.eventDestination.Contains<String>(pluginInfo.plugin.getPluginId()))
+                if (e.isBroadcast || e.eventDestination.Contains<String>(pluginInfo.plugin.getPluginId()))
                 {
                     pluginInfo.plugin.trigger(e);
                 }
             }
+        }
+
+        /***************************************************************************************************
+        ***************************************** 插件报警相关操作 *****************************************
+        ****************************************************************************************************/
+        private void pluginAlarmHappend(BasAlarm alarm)
+        {
+
+        }
+        private void pluginAlarmSolvedHappend(BasAlarm alarm)
+        {
+
         }
 
     }
@@ -1006,6 +1046,17 @@ namespace FrontFramework
         {
             this.verticalPosition = verticalPosition;
             this.horizontalPosition = horizontalPosition;
+        }
+    }
+
+    class PluginMenuHelper 
+    {
+        public String pluginID;
+        public String menuID;
+        public String displayContent;
+        public override string ToString()
+        {
+            return displayContent;
         }
     }
 

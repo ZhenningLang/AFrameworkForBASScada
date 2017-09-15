@@ -134,6 +134,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Alarm\Views\AlarmDetails.xaml.cs">
+      <DependentUpon>AlarmDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\Views\AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
@@ -178,6 +181,10 @@
     </Compile>
     <Compile Include="Utils\XmlBasedPropUtil.cs" />
     <Compile Include="Utils\PropertyUtilInterface.cs" />
+    <Page Include="Alarm\Views\AlarmDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Plugin\Views\DeleteVerify.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
